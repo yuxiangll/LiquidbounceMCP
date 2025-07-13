@@ -22,19 +22,19 @@ git clone git@github.com:yuxiangll/LiquidbounceMCP.git
 
 设置模块,记得导入kotlin语言
 
-![](.\assets\codeEnv.png)
+![image](https://github.com/yuxiangll/LiquidbounceMCP/tree/main/assets/codeEnv.png)
 
 设置依赖库
 
-![](.\assets\libs.png)
+![image](https://github.com/yuxiangll/LiquidbounceMCP/tree/main/assets/libs.png)
 
 (可选)设置构件
 
-![](.\assets\buildCfg.png)
+![image](https://github.com/yuxiangll/LiquidbounceMCP/tree/main/assets/buildCfg.png)
 
 ### 3. 设置运行参数
 
-![](.\assets\runCfg.png)
+![image](https://github.com/yuxiangll/LiquidbounceMCP/tree/main/assets/runCfg.png)
 
 ### 4.运行即可启动
 

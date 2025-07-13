@@ -1,5 +1,9 @@
 # LiquidbounceMCP
+
 A MCP version Liquidbounce B73 with optifine
+
+using jdk 24
+
 
 
 Made by yuxiangll,you can use it for everything you want
@@ -8,6 +12,6 @@ Made by yuxiangll,you can use it for everything you want
 
 如果由问题，请发布一个issue或者联系我yuxiangll@foxmail.com
 
-Thanks you 
+Thank you 
 
 open source makes us strong

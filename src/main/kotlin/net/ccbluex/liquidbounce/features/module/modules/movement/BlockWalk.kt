@@ -1,7 +1,7 @@
 package net.ccbluex.liquidbounce.features.module.modules.movement
 
 import net.ccbluex.liquidbounce.event.BlockBBEvent
-import net.ccbluex.liquidbounce.event.EventTarget
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
@@ -14,7 +14,7 @@ class BlockWalk : Module() {
     private val cobwebValue = BoolValue("Cobweb", true)
     private val snowValue = BoolValue("Snow", true)
 
-    @EventTarget
+    @EventHandler
     fun onBlockBB(event: BlockBBEvent) {
         if (cobwebValue.get() && event.block == Blocks.web || snowValue.get() && event.block == Blocks.snow_layer)
             event.boundingBox = AxisAlignedBB.fromBounds(event.x.toDouble(), event.y.toDouble(), event.z.toDouble(),

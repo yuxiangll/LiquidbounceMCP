@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.movement;
 
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.JumpEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
@@ -16,7 +16,7 @@ public class SlimeJump extends Module {
     private final FloatValue motionValue = new FloatValue("Motion", 0.42F, 0.2F, 1F);
     private final ListValue modeValue = new ListValue("Mode", new String[] {"Set", "Add"}, "Add");
 
-    @EventTarget
+    @EventHandler
     public void onJump(JumpEvent event) {
         if(mc.thePlayer != null && mc.theWorld != null && BlockUtils.getBlock(mc.thePlayer.getPosition().down()) instanceof BlockSlime) {
             event.cancelEvent();

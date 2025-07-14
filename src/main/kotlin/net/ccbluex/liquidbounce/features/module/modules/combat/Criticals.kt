@@ -2,7 +2,7 @@ package net.ccbluex.liquidbounce.features.module.modules.combat
 
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.event.AttackEvent
-import net.ccbluex.liquidbounce.event.EventTarget
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.PacketEvent
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
@@ -37,7 +37,7 @@ class Criticals : Module() {
             mc.thePlayer.jump()
     }
 
-    @EventTarget
+    @EventHandler
     fun onAttack(event: AttackEvent) {
         if (event.targetEntity is EntityLivingBase) {
             val entity = event.targetEntity
@@ -86,7 +86,7 @@ class Criticals : Module() {
         }
     }
 
-    @EventTarget
+    @EventHandler
     fun onPacket(event: PacketEvent) {
         val packet = event.packet
 

@@ -1,7 +1,7 @@
 package net.ccbluex.liquidbounce.features.module.modules.combat
 
 import net.ccbluex.liquidbounce.LiquidBounce
-import net.ccbluex.liquidbounce.event.EventTarget
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.JumpEvent
 import net.ccbluex.liquidbounce.event.PacketEvent
 import net.ccbluex.liquidbounce.event.UpdateEvent
@@ -56,7 +56,7 @@ class Velocity : Module() {
         mc.thePlayer?.speedInAir = 0.02F
     }
 
-    @EventTarget
+    @EventHandler
     fun onUpdate(event: UpdateEvent) {
         if (mc.thePlayer.isInWater || mc.thePlayer.isInLava || mc.thePlayer.isInWeb)
             return
@@ -148,7 +148,7 @@ class Velocity : Module() {
         }
     }
 
-    @EventTarget
+    @EventHandler
     fun onPacket(event: PacketEvent) {
         val packet = event.packet
 
@@ -189,7 +189,7 @@ class Velocity : Module() {
         }
     }
 
-    @EventTarget
+    @EventHandler
     fun onJump(event: JumpEvent) {
         if (mc.thePlayer == null || mc.thePlayer.isInWater || mc.thePlayer.isInLava || mc.thePlayer.isInWeb)
             return

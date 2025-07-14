@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.movement;
 
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.JumpEvent;
 import net.ccbluex.liquidbounce.event.MoveEvent;
 import net.ccbluex.liquidbounce.event.UpdateEvent;
@@ -27,7 +27,7 @@ public class LongJump extends Module {
     private boolean teleported;
     private boolean canMineplexBoost;
 
-    @EventTarget
+    @EventHandler
     public void onUpdate(final UpdateEvent event) {
         if(LadderJump.jumped)
             MovementUtils.strafe(MovementUtils.getSpeed() * 1.08F);
@@ -115,7 +115,7 @@ public class LongJump extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onMove(final MoveEvent event) {
         final String mode = modeValue.get();
 
@@ -129,7 +129,7 @@ public class LongJump extends Module {
         }
     }
 
-    @EventTarget(ignoreCondition = true)
+    @EventHandler()
     public void onJump(final JumpEvent event) {
         jumped = true;
         canBoost = true;

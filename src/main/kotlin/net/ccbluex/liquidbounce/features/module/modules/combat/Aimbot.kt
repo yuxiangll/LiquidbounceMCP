@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.combat
 
-import net.ccbluex.liquidbounce.event.EventTarget
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.StrafeEvent
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
@@ -28,7 +28,7 @@ class Aimbot : Module() {
 
     private val clickTimer = MSTimer()
 
-    @EventTarget
+    @EventHandler
     fun onStrafe(event: StrafeEvent) {
         if (mc.gameSettings.keyBindAttack.isKeyDown)
             clickTimer.reset()

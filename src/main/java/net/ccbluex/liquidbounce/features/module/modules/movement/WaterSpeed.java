@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.movement;
 
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.UpdateEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
@@ -14,7 +14,7 @@ public class WaterSpeed extends Module {
 
     private final FloatValue speedValue = new FloatValue("Speed", 1.2F, 1.1F, 1.5F);
 
-    @EventTarget
+    @EventHandler
     public void onUpdate(UpdateEvent event) {
         if(mc.thePlayer.isInWater() && BlockUtils.getBlock(mc.thePlayer.getPosition()) instanceof BlockLiquid) {
             final float speed = speedValue.get();

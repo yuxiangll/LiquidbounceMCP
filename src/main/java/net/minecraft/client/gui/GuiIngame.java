@@ -335,7 +335,7 @@ public class GuiIngame extends Gui
             this.overlayPlayerList.updatePlayerList(false);
         }
 
-        LiquidBounce.eventManager.callEvent(new Render2DEvent(partialTicks));
+        LiquidBounce.eventBus.post(new Render2DEvent(partialTicks));
         AWTFontRenderer.Companion.garbageCollectionTick();
 
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);

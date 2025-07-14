@@ -517,11 +517,11 @@ public class FontRenderer implements IResourceManagerReloadListener
     }
 
     public String getEventString(String string){
-        if (string == null || LiquidBounce.eventManager == null)
+        if (string == null || LiquidBounce.eventBus == null)
             return string;
 
         final TextEvent textEvent = new TextEvent(string);
-        LiquidBounce.eventManager.callEvent(textEvent);
+        LiquidBounce.eventBus.post(textEvent);
         return textEvent.getText();
     }
 

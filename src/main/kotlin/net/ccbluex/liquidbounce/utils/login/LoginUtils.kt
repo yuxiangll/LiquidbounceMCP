@@ -7,6 +7,7 @@ import com.mojang.authlib.exceptions.AuthenticationUnavailableException
 import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService
 import com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication
 import net.ccbluex.liquidbounce.LiquidBounce
+import net.ccbluex.liquidbounce.event.Event
 import net.ccbluex.liquidbounce.event.SessionEvent
 import net.ccbluex.liquidbounce.utils.MinecraftInstance
 import net.ccbluex.liquidbounce.utils.login.UserUtils.getUUID
@@ -27,7 +28,7 @@ object LoginUtils : MinecraftInstance() {
             userAuthentication.logIn()
             mc.session = Session(userAuthentication.selectedProfile.name,
                     userAuthentication.selectedProfile.id.toString(), userAuthentication.authenticatedToken, "mojang")
-            LiquidBounce.eventManager.callEvent(SessionEvent())
+            LiquidBounce.eventBus.post(SessionEvent())
             LoginResult.LOGGED
         } catch (exception: AuthenticationUnavailableException) {
             LoginResult.NO_CONTACT
@@ -46,7 +47,7 @@ object LoginUtils : MinecraftInstance() {
     @JvmStatic
     fun loginCracked(username: String?) {
         mc.session = Session(username, getUUID(username!!), "-", "legacy")
-        LiquidBounce.eventManager.callEvent(SessionEvent())
+        LiquidBounce.eventBus.post(SessionEvent())
     }
 
     @JvmStatic
@@ -72,7 +73,7 @@ object LoginUtils : MinecraftInstance() {
         val username = UserUtils.getUsername(uuid) ?: return LoginResult.INVALID_ACCOUNT_DATA
 
         mc.session = Session(username, uuid, accessToken, "mojang")
-        LiquidBounce.eventManager.callEvent(SessionEvent())
+        LiquidBounce.eventBus.post(SessionEvent())
 
         return LoginResult.LOGGED
     }

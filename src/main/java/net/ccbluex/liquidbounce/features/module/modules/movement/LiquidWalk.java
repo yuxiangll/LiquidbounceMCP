@@ -1,5 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.movement;
 
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.*;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
@@ -36,7 +37,7 @@ public class LiquidWalk extends Module {
 
     private boolean nextTick;
 
-    @EventTarget
+    @EventHandler
     public void onUpdate(final UpdateEvent event) {
         if(mc.thePlayer == null || mc.thePlayer.isSneaking())
             return;
@@ -117,7 +118,7 @@ public class LiquidWalk extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onMove(final MoveEvent event) {
         if ("aacfly".equals(modeValue.get().toLowerCase()) && mc.thePlayer.isInWater()) {
             event.setY(aacFlyValue.get());
@@ -125,7 +126,7 @@ public class LiquidWalk extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onBlockBB(final BlockBBEvent event) {
         if(mc.thePlayer == null || mc.thePlayer.getEntityBoundingBox() == null)
             return;
@@ -140,7 +141,7 @@ public class LiquidWalk extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onPacket(final PacketEvent event) {
         if(mc.thePlayer == null || !modeValue.get().equalsIgnoreCase("NCP"))
             return;
@@ -156,7 +157,7 @@ public class LiquidWalk extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onJump(final JumpEvent event) {
         if (mc.thePlayer == null)
             return;

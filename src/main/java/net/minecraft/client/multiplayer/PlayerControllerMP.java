@@ -451,7 +451,7 @@ public class PlayerControllerMP
         if (this.currentGameType != WorldSettings.GameType.SPECTATOR)
         {
             playerIn.attackTargetEntityWithCurrentItem(targetEntity);
-            LiquidBounce.eventManager.callEvent(new AttackEvent(targetEntity));
+            LiquidBounce.eventBus.post(new AttackEvent(targetEntity));
 
         }
     }
@@ -474,7 +474,7 @@ public class PlayerControllerMP
     public ItemStack windowClick(int windowId, int slotId, int mouseButtonClicked, int mode, EntityPlayer playerIn)
     {
         final ClickWindowEvent event = new ClickWindowEvent(windowId, slotId, mouseButtonClicked, mode);
-        LiquidBounce.eventManager.callEvent(event);
+        LiquidBounce.eventBus.post(event);
 
         // TODO: See if this crashes client
         if (event.isCancelled())

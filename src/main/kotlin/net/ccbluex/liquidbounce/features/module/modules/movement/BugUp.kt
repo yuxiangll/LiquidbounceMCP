@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.movement
 
-import net.ccbluex.liquidbounce.event.EventTarget
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.Render3DEvent
 import net.ccbluex.liquidbounce.event.UpdateEvent
 import net.ccbluex.liquidbounce.features.module.Module
@@ -44,7 +44,7 @@ class BugUp : Module() {
         prevZ = 0.0
     }
 
-    @EventTarget
+    @EventHandler
     fun onUpdate(e: UpdateEvent) {
         detectedLocation = null
 
@@ -103,7 +103,7 @@ class BugUp : Module() {
         }
     }
 
-    @EventTarget
+    @EventHandler
     fun onRender3D(event: Render3DEvent) {
         if (detectedLocation == null || !indicator.get() ||
                 mc.thePlayer.fallDistance + (mc.thePlayer.posY - (detectedLocation!!.y + 1)) < 3)

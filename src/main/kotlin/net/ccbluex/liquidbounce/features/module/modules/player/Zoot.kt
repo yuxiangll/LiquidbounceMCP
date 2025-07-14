@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.player
 
-import net.ccbluex.liquidbounce.event.EventTarget
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.UpdateEvent
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
@@ -16,7 +16,7 @@ class Zoot : Module() {
     private val fireValue = BoolValue("Fire", true)
     private val noAirValue = BoolValue("NoAir", false)
 
-    @EventTarget
+    @EventHandler
     fun onUpdate(event: UpdateEvent) {
         if (noAirValue.get() && !mc.thePlayer.onGround)
             return

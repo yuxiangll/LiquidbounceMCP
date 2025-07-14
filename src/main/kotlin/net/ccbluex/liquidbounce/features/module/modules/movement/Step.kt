@@ -1,5 +1,7 @@
 package net.ccbluex.liquidbounce.features.module.modules.movement
 
+import meteordevelopment.orbit.EventHandler
+import meteordevelopment.orbit.EventPriority
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.event.*
 import net.ccbluex.liquidbounce.features.module.Module
@@ -54,7 +56,7 @@ class Step : Module() {
         mc.thePlayer.stepHeight = 0.5F
     }
 
-    @EventTarget
+    @EventHandler
     fun onUpdate(event: UpdateEvent) {
         val mode = modeValue.get()
 
@@ -104,7 +106,7 @@ class Step : Module() {
         }
     }
 
-    @EventTarget
+    @EventHandler
     fun onMove(event: MoveEvent) {
         val mode = modeValue.get()
 
@@ -138,7 +140,7 @@ class Step : Module() {
         }
     }
 
-    @EventTarget
+    @EventHandler
     fun onStep(event: StepEvent) {
         mc.thePlayer ?: return
 
@@ -188,7 +190,7 @@ class Step : Module() {
         }
     }
 
-    @EventTarget(ignoreCondition = true)
+    @EventHandler(priority = EventPriority.HIGH)
     fun onStepConfirm(event: StepConfirmEvent) {
         if (mc.thePlayer == null || !isStep) // Check if step
             return
@@ -253,7 +255,7 @@ class Step : Module() {
         stepZ = 0.0
     }
 
-    @EventTarget(ignoreCondition = true)
+    @EventHandler(priority = EventPriority.HIGH)
     fun onPacket(event: PacketEvent) {
         val packet = event.packet
 

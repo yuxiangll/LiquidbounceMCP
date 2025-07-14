@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.render;
 
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.Render3DEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
@@ -46,7 +46,7 @@ public class NameTags extends Module {
     private final BoolValue borderValue = new BoolValue("Border", true);
     private final FloatValue scaleValue = new FloatValue("Scale", 1F, 1F, 4F);
 
-    @EventTarget
+    @EventHandler
     public void onRender3D(Render3DEvent event) {
         GL11.glPushAttrib(GL11.GL_ENABLE_BIT);
         GL11.glPushMatrix();

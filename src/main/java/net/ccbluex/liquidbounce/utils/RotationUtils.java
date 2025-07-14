@@ -1,8 +1,7 @@
 package net.ccbluex.liquidbounce.utils;
 
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.EventTarget;
-import net.ccbluex.liquidbounce.event.Listenable;
 import net.ccbluex.liquidbounce.event.PacketEvent;
 import net.ccbluex.liquidbounce.event.TickEvent;
 import net.ccbluex.liquidbounce.features.module.modules.combat.FastBow;
@@ -14,7 +13,7 @@ import net.minecraft.util.*;
 
 import java.util.Random;
 
-public final class RotationUtils extends MinecraftInstance implements Listenable {
+public final class RotationUtils extends MinecraftInstance{
 
     private static Random random = new Random();
 
@@ -293,7 +292,7 @@ public final class RotationUtils extends MinecraftInstance implements Listenable
      *
      * @param event Tick event
      */
-    @EventTarget
+    @EventHandler
     public void onTick(final TickEvent event) {
         if(targetRotation != null) {
             keepLength--;
@@ -312,7 +311,7 @@ public final class RotationUtils extends MinecraftInstance implements Listenable
      *
      * @param event Packet Event
      */
-    @EventTarget
+    @EventHandler
     public void onPacket(final PacketEvent event) {
         final Packet<?> packet = event.getPacket();
 
@@ -361,11 +360,4 @@ public final class RotationUtils extends MinecraftInstance implements Listenable
         targetRotation = null;
     }
 
-    /**
-     * @return YESSSS!!!
-     */
-    @Override
-    public boolean handleEvents() {
-        return true;
-    }
 }

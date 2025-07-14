@@ -1,7 +1,7 @@
 package net.ccbluex.liquidbounce.features.module.modules.combat;
 
 import net.ccbluex.liquidbounce.event.EventState;
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.MotionEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
@@ -19,7 +19,7 @@ public class TeleportHit extends Module {
     private EntityLivingBase targetEntity;
     private boolean shouldHit;
 
-    @EventTarget
+    @EventHandler
     public void onMotion(MotionEvent event) {
         if(event.getEventState() != EventState.PRE)
             return;

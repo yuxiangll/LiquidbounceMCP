@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.combat
 
-import net.ccbluex.liquidbounce.event.EventTarget
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.Render3DEvent
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
@@ -32,7 +32,7 @@ class Trigger : Module() {
     private var delay = TimeUtils.randomClickDelay(minCPS.get(), maxCPS.get())
     private var lastSwing = 0L
 
-    @EventTarget
+    @EventHandler
     fun onRender(event: Render3DEvent) {
         if (mc.objectMouseOver != null && System.currentTimeMillis() - lastSwing >= delay &&
                 EntityUtils.isSelected(mc.objectMouseOver.entityHit, true)) {

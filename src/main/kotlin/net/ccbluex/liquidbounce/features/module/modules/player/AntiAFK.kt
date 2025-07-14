@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.player
 
-import net.ccbluex.liquidbounce.event.EventTarget
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.UpdateEvent
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
@@ -34,7 +34,7 @@ class AntiAFK : Module() {
     private var shouldMove = false
     private var randomTimerDelay = 500L
 
-    @EventTarget
+    @EventHandler
     fun onUpdate(event: UpdateEvent) {
         when (modeValue.get().lowercase()) {
             "old" -> {

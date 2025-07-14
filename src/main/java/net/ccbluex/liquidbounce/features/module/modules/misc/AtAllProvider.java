@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.misc;
 
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.PacketEvent;
 import net.ccbluex.liquidbounce.event.UpdateEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
@@ -60,7 +60,7 @@ public class AtAllProvider extends Module {
         super.onDisable();
     }
 
-    @EventTarget
+    @EventHandler
     public void onUpdate(final UpdateEvent event) {
         if(!msTimer.hasTimePassed(delay))
             return;
@@ -83,7 +83,7 @@ public class AtAllProvider extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onPacket(final PacketEvent event) {
         if(event.getPacket() instanceof C01PacketChatMessage) {
             final C01PacketChatMessage packetChatMessage = (C01PacketChatMessage) event.getPacket();

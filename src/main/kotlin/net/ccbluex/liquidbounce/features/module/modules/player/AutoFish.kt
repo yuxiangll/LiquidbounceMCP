@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.player
 
-import net.ccbluex.liquidbounce.event.EventTarget
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.UpdateEvent
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
@@ -13,7 +13,7 @@ class AutoFish : Module() {
 
     private val rodOutTimer = MSTimer()
 
-    @EventTarget
+    @EventHandler
     fun onUpdate(event: UpdateEvent) {
         if (mc.thePlayer.heldItem == null || mc.thePlayer.heldItem.item !is ItemFishingRod)
             return

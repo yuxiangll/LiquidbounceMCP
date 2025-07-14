@@ -59,7 +59,7 @@ public abstract class Render<T extends Entity> implements IEntityRenderer
      */
     public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
-        LiquidBounce.eventManager.callEvent(new RenderEntityEvent(entity, x, y, z, entityYaw, partialTicks));
+        LiquidBounce.eventBus.post(new RenderEntityEvent(entity, x, y, z, entityYaw, partialTicks));
 
         this.renderName(entity, x, y, z);
     }

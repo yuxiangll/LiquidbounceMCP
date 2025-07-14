@@ -450,7 +450,7 @@ public abstract class Entity implements ICommandSender
         MoveEvent moveEvent = null;
         if(isPlayer){
             moveEvent = new MoveEvent(x, y, z);
-            LiquidBounce.eventManager.callEvent(moveEvent);
+            LiquidBounce.eventBus.post(moveEvent);
 
             if(moveEvent.isCancelled()){
                 return;
@@ -585,7 +585,7 @@ public abstract class Entity implements ICommandSender
                 StepEvent stepEvent = null;
                 if(isPlayer){
                     stepEvent = new StepEvent(this.stepHeight);
-                    LiquidBounce.eventManager.callEvent(stepEvent);
+                    LiquidBounce.eventBus.post(stepEvent);
                 }
 
                 double d11 = x;
@@ -678,7 +678,7 @@ public abstract class Entity implements ICommandSender
                     z = d8;
                     this.setEntityBoundingBox(axisalignedbb3);
                 }else if(isPlayer){
-                    LiquidBounce.eventManager.callEvent(new StepConfirmEvent());
+                    LiquidBounce.eventBus.post(new StepConfirmEvent());
                 }
             }
 
@@ -1057,7 +1057,7 @@ public abstract class Entity implements ICommandSender
 
         if(this == Minecraft.getMinecraft().thePlayer){
             final StrafeEvent strafeEvent = new StrafeEvent(strafe, forward, friction);
-            LiquidBounce.eventManager.callEvent(strafeEvent);
+            LiquidBounce.eventBus.post(strafeEvent);
 
             if (strafeEvent.isCancelled())
                 return;

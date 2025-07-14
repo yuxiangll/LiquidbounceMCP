@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.render;
 
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.Render3DEvent;
 import net.ccbluex.liquidbounce.event.UpdateEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
@@ -24,7 +24,7 @@ public class Breadcrumbs extends Module {
     public final BoolValue colorRainbow = new BoolValue("Rainbow", false);
     private final LinkedList<double[]> positions = new LinkedList<>();
 
-    @EventTarget
+    @EventHandler
     public void onRender3D(Render3DEvent event) {
         final Color color = colorRainbow.get() ? ColorUtils.rainbow() : new Color(colorRedValue.get(), colorGreenValue.get(), colorBlueValue.get());
 
@@ -56,7 +56,7 @@ public class Breadcrumbs extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onUpdate(UpdateEvent event) {
         synchronized (positions) {
             positions.add(new double[]{mc.thePlayer.posX, mc.thePlayer.getEntityBoundingBox().minY, mc.thePlayer.posZ});

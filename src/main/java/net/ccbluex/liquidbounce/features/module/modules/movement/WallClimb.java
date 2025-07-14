@@ -1,5 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.movement;
 
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.*;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
@@ -24,7 +25,7 @@ public class WallClimb extends Module {
     private boolean glitch;
     private int waited;
 
-    @EventTarget
+    @EventHandler
     public void onMove(MoveEvent event) {
         if(!mc.thePlayer.isCollidedHorizontally || mc.thePlayer.isOnLadder() || mc.thePlayer.isInWater() || mc.thePlayer.isInLava())
             return;
@@ -35,7 +36,7 @@ public class WallClimb extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onUpdate(MotionEvent event) {
         if(event.getEventState() != EventState.POST)
             return;
@@ -97,7 +98,7 @@ public class WallClimb extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onPacket(final PacketEvent event) {
         final Packet<?> packet = event.getPacket();
 
@@ -115,7 +116,7 @@ public class WallClimb extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onBlockBB(final BlockBBEvent event) {
         if(mc.thePlayer == null)
             return;

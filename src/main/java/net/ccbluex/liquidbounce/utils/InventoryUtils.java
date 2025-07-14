@@ -1,8 +1,7 @@
 package net.ccbluex.liquidbounce.utils;
 
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.ClickWindowEvent;
-import net.ccbluex.liquidbounce.event.EventTarget;
-import net.ccbluex.liquidbounce.event.Listenable;
 import net.ccbluex.liquidbounce.event.PacketEvent;
 import net.ccbluex.liquidbounce.utils.timer.MSTimer;
 import net.minecraft.block.Block;
@@ -16,7 +15,7 @@ import net.minecraft.network.play.client.C08PacketPlayerBlockPlacement;
 import java.util.Arrays;
 import java.util.List;
 
-public final class InventoryUtils extends MinecraftInstance implements Listenable {
+public final class InventoryUtils extends MinecraftInstance {
 
     public static final MSTimer CLICK_TIMER = new MSTimer();
     public static final List<Block> BLOCK_BLACKLIST = Arrays.asList(Blocks.enchanting_table, Blocks.chest, Blocks.ender_chest, Blocks.trapped_chest,
@@ -72,12 +71,12 @@ public final class InventoryUtils extends MinecraftInstance implements Listenabl
         return -1;
     }
 
-    @EventTarget
+    @EventHandler
     public void onClick(final ClickWindowEvent event) {
         CLICK_TIMER.reset();
     }
 
-    @EventTarget
+    @EventHandler
     public void onPacket(final PacketEvent event) {
         final Packet packet = event.getPacket();
 
@@ -85,8 +84,4 @@ public final class InventoryUtils extends MinecraftInstance implements Listenabl
             CLICK_TIMER.reset();
     }
 
-    @Override
-    public boolean handleEvents() {
-        return true;
-    }
 }

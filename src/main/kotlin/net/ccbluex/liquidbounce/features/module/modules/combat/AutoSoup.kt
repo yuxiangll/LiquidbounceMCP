@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.combat
 
-import net.ccbluex.liquidbounce.event.EventTarget
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.UpdateEvent
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
@@ -31,7 +31,7 @@ class AutoSoup : Module() {
     override val tag: String
         get() = healthValue.get().toString()
 
-    @EventTarget
+    @EventHandler
     fun onUpdate(event: UpdateEvent?) {
         if (!timer.hasTimePassed(delayValue.get().toLong()))
             return

@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.combat;
 
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.UpdateEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
@@ -30,7 +30,7 @@ public class Ignite extends Module {
 
    private final MSTimer msTimer = new MSTimer();
 
-   @EventTarget
+   @EventHandler
    public void onUpdate(final UpdateEvent event) {
       if (!msTimer.hasTimePassed(500L))
          return;

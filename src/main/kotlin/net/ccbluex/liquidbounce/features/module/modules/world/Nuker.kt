@@ -1,7 +1,7 @@
 package net.ccbluex.liquidbounce.features.module.modules.world
 
 import net.ccbluex.liquidbounce.LiquidBounce
-import net.ccbluex.liquidbounce.event.EventTarget
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.Render3DEvent
 import net.ccbluex.liquidbounce.event.UpdateEvent
 import net.ccbluex.liquidbounce.features.module.Module
@@ -57,7 +57,7 @@ class Nuker : Module() {
     private var nukeTimer = TickTimer()
     private var nuke = 0
 
-    @EventTarget
+    @EventHandler
     fun onUpdate(event: UpdateEvent) {
         // Block hit delay
         if (blockHitDelay > 0 && !LiquidBounce.moduleManager[FastBreak::class.java]!!.state) {
@@ -212,7 +212,7 @@ class Nuker : Module() {
         }
     }
 
-    @EventTarget
+    @EventHandler
     fun onRender3D(event: Render3DEvent) {
         // Safe block
         if (!layerValue.get()) {

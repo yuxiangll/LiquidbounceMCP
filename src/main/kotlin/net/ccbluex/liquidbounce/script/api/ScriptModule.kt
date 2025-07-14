@@ -1,5 +1,6 @@
 package net.ccbluex.liquidbounce.script.api
 
+import meteordevelopment.orbit.EventHandler
 import net.ccbluex.liquidbounce.event.*
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
@@ -65,52 +66,52 @@ class ScriptModule(private val moduleObject: JSObject) : Module() {
 
     override fun onDisable() = callEvent("disable")
 
-    @EventTarget
+    @EventHandler
     fun onUpdate(updateEvent: UpdateEvent) = callEvent("update")
 
-    @EventTarget
+    @EventHandler
     fun onMotion(motionEvent: MotionEvent) = callEvent("motion", motionEvent)
 
-    @EventTarget
+    @EventHandler
     fun onRender2D(render2DEvent: Render2DEvent) = callEvent("render2D", render2DEvent)
 
-    @EventTarget
+    @EventHandler
     fun onRender3D(render3DEvent: Render3DEvent) = callEvent("render3D", render3DEvent)
 
-    @EventTarget
+    @EventHandler
     fun onPacket(packetEvent: PacketEvent) = callEvent("packet", packetEvent)
 
-    @EventTarget
+    @EventHandler
     fun onJump(jumpEvent: JumpEvent) = callEvent("jump", jumpEvent)
 
-    @EventTarget
+    @EventHandler
     fun onAttack(attackEvent: AttackEvent) = callEvent("attack", attackEvent)
 
-    @EventTarget
+    @EventHandler
     fun onKey(keyEvent: KeyEvent) = callEvent("key", keyEvent)
 
-    @EventTarget
+    @EventHandler
     fun onMove(moveEvent: MoveEvent) = callEvent("move", moveEvent)
 
-    @EventTarget
+    @EventHandler
     fun onStep(stepEvent: StepEvent) = callEvent("step", stepEvent)
 
-    @EventTarget
+    @EventHandler
     fun onStepConfirm(stepConfirmEvent: StepConfirmEvent) = callEvent("stepConfirm")
 
-    @EventTarget
+    @EventHandler
     fun onWorld(worldEvent: WorldEvent) = callEvent("world", worldEvent)
 
-    @EventTarget
+    @EventHandler
     fun onSession(sessionEvent: SessionEvent) = callEvent("session")
 
-    @EventTarget
+    @EventHandler
     fun onClickBlock(clickBlockEvent: ClickBlockEvent) = callEvent("clickBlock", clickBlockEvent)
 
-    @EventTarget
+    @EventHandler
     fun onStrafe(strafeEvent: StrafeEvent) = callEvent("strafe", strafeEvent)
 
-    @EventTarget
+    @EventHandler
     fun onSlowDown(slowDownEvent: SlowDownEvent) = callEvent("slowDown", slowDownEvent)
 
     /**

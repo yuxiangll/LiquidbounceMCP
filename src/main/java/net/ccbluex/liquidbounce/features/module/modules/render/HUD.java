@@ -1,5 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.render;
 
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.*;
 import net.ccbluex.liquidbounce.features.module.Module;
@@ -40,7 +41,7 @@ public class HUD extends Module {
         }
     };
 
-    @EventTarget
+    @EventHandler
     public void onRender2D(final Render2DEvent event) {
         if (mc.currentScreen instanceof GuiHudDesigner)
             return;
@@ -48,17 +49,17 @@ public class HUD extends Module {
         LiquidBounce.hud.render(false);
     }
 
-    @EventTarget
+    @EventHandler
     public void onUpdate(final UpdateEvent event) {
         LiquidBounce.hud.update();
     }
 
-    @EventTarget
+    @EventHandler
     public void onKey(final KeyEvent event) {
         LiquidBounce.hud.handleKey('a', event.getKey());
     }
 
-    @EventTarget(ignoreCondition = true)
+    @EventHandler()
     public void onScreen(final ScreenEvent event) {
         if (mc.theWorld == null || mc.thePlayer == null)
             return;

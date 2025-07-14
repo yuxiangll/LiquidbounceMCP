@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.combat
 
-import net.ccbluex.liquidbounce.event.EventTarget
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.Render3DEvent
 import net.ccbluex.liquidbounce.event.UpdateEvent
 import net.ccbluex.liquidbounce.features.module.Module
@@ -33,7 +33,7 @@ class BowAimbot : Module() {
         target = null
     }
 
-    @EventTarget
+    @EventHandler
     fun onUpdate(event: UpdateEvent) {
         target = null
 
@@ -45,7 +45,7 @@ class BowAimbot : Module() {
         }
     }
 
-    @EventTarget
+    @EventHandler
     fun onRender3D(event: Render3DEvent) {
         if (target != null && !priorityValue.get().equals("Multi", ignoreCase = true) && markValue.get())
             RenderUtils.drawPlatform(target, Color(37, 126, 255, 70))

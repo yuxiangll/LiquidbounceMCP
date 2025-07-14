@@ -2,7 +2,7 @@ package net.ccbluex.liquidbounce.features.module.modules.movement;
 
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.EventState;
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.MotionEvent;
 import net.ccbluex.liquidbounce.event.SlowDownEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
@@ -47,7 +47,7 @@ public class NoSlow extends Module {
     // Soulsand TODO: Soulsand
     public BoolValue soulSandValue = new BoolValue("Soulsand", true); // Soulsand
 
-    @EventTarget
+    @EventHandler
     public void onMotion(MotionEvent event) {
         ItemStack heldItem = mc.thePlayer.getHeldItem();
         if (heldItem == null || !(heldItem.getItem() instanceof ItemSword) || !MovementUtils.isMoving()) {
@@ -72,7 +72,7 @@ public class NoSlow extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onSlowDown(SlowDownEvent event) {
         if(mc.thePlayer.getHeldItem() == null)
             return;

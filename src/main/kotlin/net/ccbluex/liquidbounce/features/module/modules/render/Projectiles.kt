@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.render
 
-import net.ccbluex.liquidbounce.event.EventTarget
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.Render3DEvent
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
@@ -29,7 +29,7 @@ class Projectiles : Module() {
     private val colorGreenValue = IntegerValue("G", 160, 0, 255)
     private val colorBlueValue = IntegerValue("B", 255, 0, 255)
 
-    @EventTarget
+    @EventHandler
     fun onRender3D(event: Render3DEvent) {
         mc.thePlayer.heldItem ?: return
 

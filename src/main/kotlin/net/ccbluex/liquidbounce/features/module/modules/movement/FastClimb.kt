@@ -1,7 +1,7 @@
 package net.ccbluex.liquidbounce.features.module.modules.movement
 
 import net.ccbluex.liquidbounce.event.BlockBBEvent
-import net.ccbluex.liquidbounce.event.EventTarget
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.MoveEvent
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
@@ -32,7 +32,7 @@ class FastClimb : Module() {
             arrayOf("Vanilla", "Clip", "AAC3.0.0", "AAC3.0.5", "SAAC3.1.2", "AAC3.1.2"), "Vanilla")
     private val speedValue = FloatValue("Speed", 0.2872F, 0.01F, 5F)
 
-    @EventTarget
+    @EventHandler
     fun onMove(event: MoveEvent) {
         val mode = modeValue.get()
 
@@ -110,7 +110,7 @@ class FastClimb : Module() {
         }
     }
 
-    @EventTarget
+    @EventHandler
     fun onBlockBB(event: BlockBBEvent) {
         if (mc.thePlayer != null && (event.block is BlockLadder || event.block is BlockVine) &&
                 modeValue.get().equals("AAC3.0.5", ignoreCase = true) && mc.thePlayer.isOnLadder)

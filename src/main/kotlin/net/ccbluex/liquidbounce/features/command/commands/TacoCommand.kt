@@ -1,8 +1,7 @@
 package net.ccbluex.liquidbounce.features.command.commands
 
+import meteordevelopment.orbit.EventHandler
 import net.ccbluex.liquidbounce.LiquidBounce
-import net.ccbluex.liquidbounce.event.EventTarget
-import net.ccbluex.liquidbounce.event.Listenable
 import net.ccbluex.liquidbounce.event.Render2DEvent
 import net.ccbluex.liquidbounce.event.UpdateEvent
 import net.ccbluex.liquidbounce.features.command.Command
@@ -11,7 +10,7 @@ import net.ccbluex.liquidbounce.utils.render.RenderUtils
 import net.minecraft.client.gui.ScaledResolution
 import net.minecraft.util.ResourceLocation
 
-class TacoCommand : Command("taco", emptyArray()), Listenable {
+class TacoCommand : Command("taco", emptyArray()) {
     private var toggle = false
     private var image = 0
     private var running = 0f
@@ -31,7 +30,7 @@ class TacoCommand : Command("taco", emptyArray()), Listenable {
     )
 
     init {
-        LiquidBounce.eventManager.registerListener(this)
+        LiquidBounce.eventBus.subscribe(this)
     }
 
     /**
@@ -42,7 +41,7 @@ class TacoCommand : Command("taco", emptyArray()), Listenable {
         ClientUtils.displayChatMessage(if (toggle) "§aTACO TACO TACO. :)" else "§cYou made the little taco sad! :(")
     }
 
-    @EventTarget
+    @EventHandler
     fun onRender2D(event: Render2DEvent) {
         if (!toggle)
             return
@@ -54,7 +53,7 @@ class TacoCommand : Command("taco", emptyArray()), Listenable {
             running = -64f
     }
 
-    @EventTarget
+    @EventHandler
     fun onUpdate(event: UpdateEvent) {
         if (!toggle) {
             image = 0
@@ -64,8 +63,6 @@ class TacoCommand : Command("taco", emptyArray()), Listenable {
         image++
         if (image >= tacoTextures.size) image = 0
     }
-
-    override fun handleEvents() = true
 
     override fun tabComplete(args: Array<String>): List<String> {
         return listOf("TACO")

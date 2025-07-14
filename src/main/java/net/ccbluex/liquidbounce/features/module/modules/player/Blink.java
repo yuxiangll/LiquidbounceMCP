@@ -1,7 +1,7 @@
 package net.ccbluex.liquidbounce.features.module.modules.player;
 
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.PacketEvent;
 import net.ccbluex.liquidbounce.event.Render3DEvent;
 import net.ccbluex.liquidbounce.event.UpdateEvent;
@@ -70,7 +70,7 @@ public class Blink extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onPacket(PacketEvent event) {
         final Packet<?> packet = event.getPacket();
 
@@ -90,7 +90,7 @@ public class Blink extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onUpdate(UpdateEvent event) {
         synchronized(positions) {
             positions.add(new double[] {mc.thePlayer.posX, mc.thePlayer.getEntityBoundingBox().minY, mc.thePlayer.posZ});
@@ -102,7 +102,7 @@ public class Blink extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onRender3D(Render3DEvent event) {
         final Breadcrumbs breadcrumbs = (Breadcrumbs) LiquidBounce.moduleManager.getModule(Breadcrumbs.class);
         final Color color = breadcrumbs.colorRainbow.get() ? ColorUtils.rainbow() : new Color(breadcrumbs.colorRedValue.get(), breadcrumbs.colorGreenValue.get(), breadcrumbs.colorBlueValue.get());

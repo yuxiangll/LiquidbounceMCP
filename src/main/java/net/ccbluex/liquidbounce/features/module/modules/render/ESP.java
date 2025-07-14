@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.render;
 
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.Render2DEvent;
 import net.ccbluex.liquidbounce.event.Render3DEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
@@ -59,7 +59,7 @@ public class ESP extends Module {
     private final BoolValue colorRainbow = new BoolValue("Rainbow", false);
     private final BoolValue colorTeam = new BoolValue("Team", false);
 
-    @EventTarget
+    @EventHandler
     public void onRender3D(Render3DEvent event) {
         final String mode = modeValue.get();
 
@@ -189,7 +189,7 @@ public class ESP extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onRender2D(final Render2DEvent event) {
         final String mode = modeValue.get().toLowerCase();
 

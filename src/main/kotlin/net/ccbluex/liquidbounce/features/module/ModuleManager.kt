@@ -1,9 +1,8 @@
 package net.ccbluex.liquidbounce.features.module
 
+import meteordevelopment.orbit.EventHandler
 import net.ccbluex.liquidbounce.LiquidBounce
-import net.ccbluex.liquidbounce.event.EventTarget
 import net.ccbluex.liquidbounce.event.KeyEvent
-import net.ccbluex.liquidbounce.event.Listenable
 import net.ccbluex.liquidbounce.features.module.modules.`fun`.Derp
 import net.ccbluex.liquidbounce.features.module.modules.`fun`.SkinDerp
 import net.ccbluex.liquidbounce.features.module.modules.combat.*
@@ -18,13 +17,13 @@ import net.ccbluex.liquidbounce.utils.ClientUtils
 import java.util.*
 
 
-class ModuleManager : Listenable {
+class ModuleManager {
 
     val modules = TreeSet<Module> { module1, module2 -> module1.name.compareTo(module2.name) }
     private val moduleClassMap = hashMapOf<Class<*>, Module>()
 
     init {
-        LiquidBounce.eventManager.registerListener(this)
+        LiquidBounce.eventBus.subscribe(this)
     }
 
     /**
@@ -131,7 +130,6 @@ class ModuleManager : Listenable {
                 TNTBlock::class.java,
                 InventoryCleaner::class.java,
                 TrueSight::class.java,
-                LiquidChat::class.java,
                 AntiBlind::class.java,
                 NoSwing::class.java,
                 BedGodMode::class.java,
@@ -191,7 +189,7 @@ class ModuleManager : Listenable {
         moduleClassMap[module.javaClass] = module
 
         generateCommand(module)
-        LiquidBounce.eventManager.registerListener(module)
+        //LiquidBounce.eventBus.subscribe(module)
     }
 
     /**
@@ -219,7 +217,7 @@ class ModuleManager : Listenable {
     fun unregisterModule(module: Module) {
         modules.remove(module)
         moduleClassMap.remove(module::class.java)
-        LiquidBounce.eventManager.unregisterListener(module)
+        LiquidBounce.eventBus.unsubscribe(module)
     }
 
     /**
@@ -259,8 +257,9 @@ class ModuleManager : Listenable {
     /**
      * Handle incoming key presses
      */
-    @EventTarget
-    private fun onKey(event: KeyEvent) = modules.filter { it.keyBind == event.key }.forEach { it.toggle() }
+    @EventHandler
+    private fun onKey(event: KeyEvent) = modules.filter {
+        it.keyBind == event.key }.forEach { it.toggle()
+    }
 
-    override fun handleEvents() = true
 }

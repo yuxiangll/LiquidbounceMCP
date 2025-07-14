@@ -1336,7 +1336,7 @@ EntityLivingBase extends Entity
     {
 
         final JumpEvent jumpEvent = new JumpEvent(this.getJumpUpwardsMotion());
-        LiquidBounce.eventManager.callEvent(jumpEvent);
+        LiquidBounce.eventBus.post(jumpEvent);
         if(jumpEvent.isCancelled())
             return;
 

@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.player
 
-import net.ccbluex.liquidbounce.event.EventTarget
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.MoveEvent
 import net.ccbluex.liquidbounce.event.UpdateEvent
 import net.ccbluex.liquidbounce.features.module.Module
@@ -30,7 +30,7 @@ class FastUse : Module() {
     private val msTimer = MSTimer()
     private var usedTimer = false
 
-    @EventTarget
+    @EventHandler
     fun onUpdate(event: UpdateEvent) {
         if (usedTimer) {
             mc.timer.timerSpeed = 1F
@@ -84,7 +84,7 @@ class FastUse : Module() {
         }
     }
 
-    @EventTarget
+    @EventHandler
     fun onMove(event: MoveEvent?) {
         if (event == null) return
 

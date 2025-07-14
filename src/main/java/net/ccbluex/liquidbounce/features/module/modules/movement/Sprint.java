@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.movement;
 
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.UpdateEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
@@ -30,7 +30,7 @@ public class Sprint extends Module {
     public final BoolValue checkServerSide = new BoolValue("CheckServerSide", false);
     public final BoolValue checkServerSideGround = new BoolValue("CheckServerSideOnlyGround", false);
 
-    @EventTarget
+    @EventHandler
     public void onUpdate(final UpdateEvent event) {
         if(!MovementUtils.isMoving() || mc.thePlayer.isSneaking() ||
                 (blindnessValue.get() && mc.thePlayer.isPotionActive(Potion.blindness))||

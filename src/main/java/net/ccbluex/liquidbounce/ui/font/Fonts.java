@@ -78,7 +78,7 @@ public class Fonts {
     }
 
     /**
-     * 初始加载时从LB云下载字体
+     * 初始加载时从liquidbounce cloud的github仓库下载字体
      */
     private static void downloadFonts() {
         try {

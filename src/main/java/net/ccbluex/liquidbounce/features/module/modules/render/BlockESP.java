@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.render;
 
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.Render3DEvent;
 import net.ccbluex.liquidbounce.event.UpdateEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
@@ -38,7 +38,7 @@ public class BlockESP extends Module {
     private final List<BlockPos> posList = new ArrayList<>();
     private Thread thread;
 
-    @EventTarget
+    @EventHandler
     public void onUpdate(UpdateEvent event) {
         if(searchTimer.hasTimePassed(1000L) && (thread == null || !thread.isAlive())) {
             final int radius = radiusValue.get();
@@ -76,7 +76,7 @@ public class BlockESP extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onRender3D(Render3DEvent event) {
         synchronized(posList) {
             final Color color = colorRainbow.get() ? ColorUtils.rainbow() : new Color(colorRedValue.get(), colorGreenValue.get(), colorBlueValue.get());

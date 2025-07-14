@@ -1,14 +1,13 @@
 package net.ccbluex.liquidbounce.features.special
 
-import net.ccbluex.liquidbounce.event.EventTarget
-import net.ccbluex.liquidbounce.event.Listenable
+import meteordevelopment.orbit.EventHandler
 import net.ccbluex.liquidbounce.event.SessionEvent
 import net.ccbluex.liquidbounce.utils.MinecraftInstance
 
 //TODO: Restore functionality (or crack this would be ok too)
-class DonatorCape : Listenable, MinecraftInstance() {
+class DonatorCape : MinecraftInstance() {
 
-    @EventTarget
+    @EventHandler
     fun onSession(event: SessionEvent) {
         /*if (!GuiDonatorCape.capeEnabled || GuiDonatorCape.transferCode.isEmpty() ||
                 !UserUtils.isValidTokenOffline(mc.session.token))
@@ -42,5 +41,4 @@ class DonatorCape : Listenable, MinecraftInstance() {
         }*/
     }
 
-    override fun handleEvents() = true
 }

@@ -1,7 +1,7 @@
 package net.ccbluex.liquidbounce.features.module.modules.world
 
 import net.ccbluex.liquidbounce.LiquidBounce
-import net.ccbluex.liquidbounce.event.EventTarget
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.Render3DEvent
 import net.ccbluex.liquidbounce.event.UpdateEvent
 import net.ccbluex.liquidbounce.features.module.Module
@@ -55,7 +55,7 @@ object Fucker : Module() {
     private val switchTimer = MSTimer()
     var currentDamage = 0F
 
-    @EventTarget
+    @EventHandler
     fun onUpdate(event: UpdateEvent) {
         if (noHitValue.get()) {
             val killAura = LiquidBounce.moduleManager.getModule(KillAura::class.java) as KillAura
@@ -190,7 +190,7 @@ object Fucker : Module() {
         }
     }
 
-    @EventTarget
+    @EventHandler
     fun onRender3D(event: Render3DEvent) {
         RenderUtils.drawBlockBox(pos ?: return, Color.RED, true)
     }

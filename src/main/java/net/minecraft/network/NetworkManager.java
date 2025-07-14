@@ -140,7 +140,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet>
 
     protected void channelRead0(ChannelHandlerContext p_channelRead0_1_, Packet p_channelRead0_2_) throws Exception {
         final PacketEvent event = new PacketEvent(p_channelRead0_2_);
-        LiquidBounce.eventManager.callEvent(event);
+        LiquidBounce.eventBus.post(event);
 
         if(event.isCancelled())
             return;
@@ -169,7 +169,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet>
     {
 
         final PacketEvent event = new PacketEvent(packetIn);
-        LiquidBounce.eventManager.callEvent(event);
+        LiquidBounce.eventBus.post(event);
 
         if(event.isCancelled())
             return;

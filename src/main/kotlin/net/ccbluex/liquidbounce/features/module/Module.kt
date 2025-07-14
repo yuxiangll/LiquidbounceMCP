@@ -1,7 +1,6 @@
 package net.ccbluex.liquidbounce.features.module
 
 import net.ccbluex.liquidbounce.LiquidBounce
-import net.ccbluex.liquidbounce.event.Listenable
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.Notification
 import net.ccbluex.liquidbounce.utils.MinecraftInstance
 import net.ccbluex.liquidbounce.utils.render.ColorUtils.stripColor
@@ -10,7 +9,7 @@ import net.minecraft.client.audio.PositionedSoundRecord
 import net.minecraft.util.ResourceLocation
 import org.lwjgl.input.Keyboard
 
-open class Module : MinecraftInstance(), Listenable {
+open class Module : MinecraftInstance() {
 
     // Module information
     // TODO: Remove ModuleInfo and change to constructor (#Kotlin)
@@ -48,6 +47,7 @@ open class Module : MinecraftInstance(), Listenable {
 
     // Current state of module
     var state = false
+        // 当state改变时运行
         set(value) {
             if (field == value) return
 
@@ -64,11 +64,12 @@ open class Module : MinecraftInstance(), Listenable {
             // Call on enabled or disabled
             if (value) {
                 onEnable()
-
+                LiquidBounce.eventBus.subscribe(this)
                 if (canEnable)
                     field = true
             } else {
                 onDisable()
+                LiquidBounce.eventBus.unsubscribe(this)
                 field = false
             }
 
@@ -130,5 +131,4 @@ open class Module : MinecraftInstance(), Listenable {
     /**
      * Events should be handled when module is enabled
      */
-    override fun handleEvents() = state
 }

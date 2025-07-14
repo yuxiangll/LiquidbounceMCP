@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.world
 
-import net.ccbluex.liquidbounce.event.EventTarget
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.UpdateEvent
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
@@ -12,7 +12,7 @@ class FastBreak : Module() {
 
     private val breakDamage = FloatValue("BreakDamage", 0.8F, 0.1F, 1F)
 
-    @EventTarget
+    @EventHandler
     fun onUpdate(event: UpdateEvent) {
         mc.playerController.blockHitDelay = 0
 

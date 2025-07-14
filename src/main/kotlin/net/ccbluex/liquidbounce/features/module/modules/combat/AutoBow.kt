@@ -1,7 +1,7 @@
 package net.ccbluex.liquidbounce.features.module.modules.combat
 
 import net.ccbluex.liquidbounce.LiquidBounce
-import net.ccbluex.liquidbounce.event.EventTarget
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.UpdateEvent
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
@@ -18,7 +18,7 @@ class AutoBow : Module() {
 
     private val waitForBowAimbot = BoolValue("WaitForBowAimbot", true)
 
-    @EventTarget
+    @EventHandler
     fun onUpdate(event: UpdateEvent) {
         val bowAimbot = LiquidBounce.moduleManager[BowAimbot::class.java] as BowAimbot
 

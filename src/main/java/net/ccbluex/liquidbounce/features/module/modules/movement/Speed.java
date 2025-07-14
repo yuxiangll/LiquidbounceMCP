@@ -1,5 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.movement;
 
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.*;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
@@ -103,7 +104,7 @@ public class Speed extends Module {
     public final FloatValue cubecraftPortLengthValue = new FloatValue("CubeCraft-PortLength", 1F, 0.1F, 2F);
     public final FloatValue mineplexGroundSpeedValue = new FloatValue("MineplexGround-Speed", 0.5F, 0.1F, 1F);
 
-    @EventTarget
+    @EventHandler
     public void onUpdate(final UpdateEvent event) {
         if(mc.thePlayer.isSneaking())
             return;
@@ -117,7 +118,7 @@ public class Speed extends Module {
             speedMode.onUpdate();
     }
 
-    @EventTarget
+    @EventHandler
     public void onMotion(final MotionEvent event) {
         if(mc.thePlayer.isSneaking() || event.getEventState() != EventState.PRE)
             return;
@@ -131,7 +132,7 @@ public class Speed extends Module {
             speedMode.onMotion();
     }
 
-    @EventTarget
+    @EventHandler
     public void onMove(MoveEvent event) {
         if(mc.thePlayer.isSneaking())
             return;
@@ -142,7 +143,7 @@ public class Speed extends Module {
             speedMode.onMove(event);
     }
 
-    @EventTarget
+    @EventHandler
     public void onTick(final TickEvent event) {
         if(mc.thePlayer.isSneaking())
             return;

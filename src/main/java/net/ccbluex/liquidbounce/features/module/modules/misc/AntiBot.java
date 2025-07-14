@@ -2,7 +2,7 @@ package net.ccbluex.liquidbounce.features.module.modules.misc;
 
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.AttackEvent;
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.PacketEvent;
 import net.ccbluex.liquidbounce.event.WorldEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
@@ -60,7 +60,7 @@ public class AntiBot extends Module {
         super.onDisable();
     }
 
-    @EventTarget
+    @EventHandler
     public void onPacket(final PacketEvent event) {
         if(mc.thePlayer == null || mc.theWorld == null)
             return;
@@ -104,7 +104,7 @@ public class AntiBot extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onAttack(final AttackEvent e) {
         final Entity entity = e.getTargetEntity();
 
@@ -112,7 +112,7 @@ public class AntiBot extends Module {
             hitted.add(entity.getEntityId());
     }
 
-    @EventTarget
+    @EventHandler
     public void onWorld(final WorldEvent event) {
         clearAll();
     }

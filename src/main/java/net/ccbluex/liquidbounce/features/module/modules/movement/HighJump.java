@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.movement;
 
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.JumpEvent;
 import net.ccbluex.liquidbounce.event.MoveEvent;
 import net.ccbluex.liquidbounce.event.UpdateEvent;
@@ -22,7 +22,7 @@ public class HighJump extends Module {
     private final ListValue modeValue = new ListValue("Mode", new String[] {"Vanilla", "Damage", "AACv3", "DAC", "Mineplex"}, "Vanilla");
     private final BoolValue glassValue = new BoolValue("OnlyGlassPane", false);
 
-    @EventTarget
+    @EventHandler
     public void onUpdate(final UpdateEvent event) {
         if(glassValue.get() && !(BlockUtils.getBlock(new BlockPos(mc.thePlayer.posX, mc.thePlayer.posY, mc.thePlayer.posZ)) instanceof BlockPane))
             return;
@@ -44,7 +44,7 @@ public class HighJump extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onMove(final MoveEvent event) {
         if(glassValue.get() && !(BlockUtils.getBlock(new BlockPos(mc.thePlayer.posX, mc.thePlayer.posY, mc.thePlayer.posZ)) instanceof BlockPane))
             return;
@@ -56,7 +56,7 @@ public class HighJump extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onJump(final JumpEvent event) {
         if(glassValue.get() && !(BlockUtils.getBlock(new BlockPos(mc.thePlayer.posX, mc.thePlayer.posY, mc.thePlayer.posZ)) instanceof BlockPane))
             return;

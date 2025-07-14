@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.render;
 
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.PacketEvent;
 import net.ccbluex.liquidbounce.event.UpdateEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
@@ -59,7 +59,7 @@ public class FreeCam extends Module {
         mc.thePlayer.motionZ = 0;
     }
 
-    @EventTarget
+    @EventHandler
     public void onUpdate(UpdateEvent event) {
         if(noClipValue.get())
             mc.thePlayer.noClip = true;
@@ -79,7 +79,7 @@ public class FreeCam extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onPacket(PacketEvent event) {
         final Packet<?> packet = event.getPacket();
 

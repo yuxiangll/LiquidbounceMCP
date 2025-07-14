@@ -924,7 +924,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
             skipRenderWorld = false;
         }
 
-        LiquidBounce.eventManager.callEvent(new ScreenEvent(currentScreen));
+        LiquidBounce.eventBus.post(new ScreenEvent(currentScreen));
 
         this.currentScreen = (GuiScreen)guiScreenIn;
 
@@ -1410,7 +1410,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
             if (leftClick && this.objectMouseOver != null && this.objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
                 BlockPos blockpos = this.objectMouseOver.getBlockPos();
                 if(this.leftClickCounter == 0) {
-                    LiquidBounce.eventManager.callEvent(new ClickBlockEvent(blockpos, this.objectMouseOver.sideHit));
+                    LiquidBounce.eventBus.post(new ClickBlockEvent(blockpos, this.objectMouseOver.sideHit));
                 }
 
                 if (this.theWorld.getBlockState(blockpos).getBlock().getMaterial() != Material.air && this.playerController.onPlayerDamageBlock(blockpos, this.objectMouseOver.sideHit)) {
@@ -1422,7 +1422,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
             }
         }
         if(this.leftClickCounter == 0 && theWorld.getBlockState(objectMouseOver.getBlockPos()).getBlock().getMaterial() != Material.air) {
-            LiquidBounce.eventManager.callEvent(new ClickBlockEvent(objectMouseOver.getBlockPos(), this.objectMouseOver.sideHit));
+            LiquidBounce.eventBus.post(new ClickBlockEvent(objectMouseOver.getBlockPos(), this.objectMouseOver.sideHit));
         }
     }
 
@@ -1850,7 +1850,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
                         this.currentScreen.handleKeyboardInput();
                     } else {
 
-                        LiquidBounce.eventManager.callEvent(new KeyEvent(Keyboard.getEventKey() == 0 ? Keyboard.getEventCharacter() + 256 : Keyboard.getEventKey()));
+                        LiquidBounce.eventBus.post(new KeyEvent(Keyboard.getEventKey() == 0 ? Keyboard.getEventCharacter() + 256 : Keyboard.getEventKey()));
 
                         if (k == 1) {
                             this.displayInGameMenu();
@@ -2080,7 +2080,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         {
             if (this.thePlayer != null)
             {
-                LiquidBounce.eventManager.callEvent(new TickEvent());
+                LiquidBounce.eventBus.post(new TickEvent());
                 ++this.joinPlayerCounter;
 
                 if (this.joinPlayerCounter == 30)
@@ -2277,7 +2277,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         if(theWorld != null){
             MiniMapRegister.INSTANCE.unloadAllChunks();
         }
-        LiquidBounce.eventManager.callEvent(new WorldEvent(worldClientIn));
+        LiquidBounce.eventBus.post(new WorldEvent(worldClientIn));
 
 
 

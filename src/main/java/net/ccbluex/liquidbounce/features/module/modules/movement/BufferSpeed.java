@@ -1,7 +1,7 @@
 package net.ccbluex.liquidbounce.features.module.modules.movement;
 
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.PacketEvent;
 import net.ccbluex.liquidbounce.event.UpdateEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
@@ -59,7 +59,7 @@ public class BufferSpeed extends Module {
     private boolean hadFastHop;
     private boolean legitHop;
 
-    @EventTarget
+    @EventHandler
     public void onUpdate(final UpdateEvent event) {
         if (LiquidBounce.moduleManager.getModule(Speed.class).getState() || (noHurtValue.get() && mc.thePlayer.hurtTime > 0)) {
             reset();
@@ -212,7 +212,7 @@ public class BufferSpeed extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onPacket(final PacketEvent event) {
         final Packet<?> packet = event.getPacket();
 

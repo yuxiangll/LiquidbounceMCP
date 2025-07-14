@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.render;
 
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.Render2DEvent;
 import net.ccbluex.liquidbounce.event.Render3DEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
@@ -27,7 +27,7 @@ public class ItemESP extends Module {
     private final IntegerValue colorBlueValue = new IntegerValue("B", 0, 0, 255);
     private final BoolValue colorRainbow = new BoolValue("Rainbow", true);
 
-    @EventTarget
+    @EventHandler
     public void onRender3D(final Render3DEvent event) {
         if (modeValue.get().equalsIgnoreCase("Box")) {
             final Color color = colorRainbow.get() ? ColorUtils.rainbow() : new Color(colorRedValue.get(), colorGreenValue.get(), colorBlueValue.get());
@@ -41,7 +41,7 @@ public class ItemESP extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onRender2D(final Render2DEvent event) {
         if (modeValue.get().equalsIgnoreCase("ShaderOutline")) {
             OutlineShader.OUTLINE_SHADER.startDraw(event.getPartialTicks());

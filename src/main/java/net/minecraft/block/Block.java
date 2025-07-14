@@ -402,7 +402,7 @@ public class Block
     public void addCollisionBoxesToList(World worldIn, BlockPos pos, IBlockState state, AxisAlignedBB mask, List<AxisAlignedBB> list, Entity collidingEntity) {
         AxisAlignedBB axisalignedbb = this.getCollisionBoundingBox(worldIn, pos, state);
         BlockBBEvent blockBBEvent = new BlockBBEvent(pos, blockState.getBlock(), axisalignedbb);
-        LiquidBounce.eventManager.callEvent(blockBBEvent);
+        LiquidBounce.eventBus.post(blockBBEvent);
         axisalignedbb = blockBBEvent.getBoundingBox();
 
         if (axisalignedbb != null && mask.intersectsWith(axisalignedbb)) {

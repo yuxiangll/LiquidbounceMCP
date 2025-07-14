@@ -1,7 +1,7 @@
 package net.ccbluex.liquidbounce.features.module.modules.render
 
 import net.ccbluex.liquidbounce.LiquidBounce
-import net.ccbluex.liquidbounce.event.EventTarget
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.PacketEvent
 import net.ccbluex.liquidbounce.event.Render3DEvent
 import net.ccbluex.liquidbounce.features.module.Module
@@ -22,13 +22,13 @@ class Rotations : Module() {
 
     private var playerYaw: Float? = null
 
-    @EventTarget
+    @EventHandler
     fun onRender3D(event: Render3DEvent) {
         if (RotationUtils.serverRotation != null && !bodyValue.get())
             mc.thePlayer.rotationYawHead = RotationUtils.serverRotation.yaw
     }
 
-    @EventTarget
+    @EventHandler
     fun onPacket(event: PacketEvent) {
         if (!bodyValue.get() || !shouldRotate() || mc.thePlayer == null)
             return

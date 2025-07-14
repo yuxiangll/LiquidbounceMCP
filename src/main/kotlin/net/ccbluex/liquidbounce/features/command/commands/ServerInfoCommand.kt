@@ -1,15 +1,14 @@
 package net.ccbluex.liquidbounce.features.command.commands
 
+import meteordevelopment.orbit.EventHandler
 import net.ccbluex.liquidbounce.LiquidBounce
-import net.ccbluex.liquidbounce.event.EventTarget
-import net.ccbluex.liquidbounce.event.Listenable
 import net.ccbluex.liquidbounce.event.PacketEvent
 import net.ccbluex.liquidbounce.features.command.Command
 import net.minecraft.network.handshake.client.C00Handshake
 
-class ServerInfoCommand : Command("serverinfo", emptyArray()), Listenable {
+class ServerInfoCommand : Command("serverinfo", emptyArray()) {
     init {
-        LiquidBounce.eventManager.registerListener(this)
+        LiquidBounce.eventBus.subscribe(this)
     }
 
     private var ip = ""
@@ -36,7 +35,7 @@ class ServerInfoCommand : Command("serverinfo", emptyArray()), Listenable {
         chat("§7Ping: §8${data.pingToServer}")
     }
 
-    @EventTarget
+    @EventHandler
     fun onPacket(event: PacketEvent) {
         val packet = event.packet
 
@@ -46,5 +45,4 @@ class ServerInfoCommand : Command("serverinfo", emptyArray()), Listenable {
         }
     }
 
-    override fun handleEvents() = true
 }

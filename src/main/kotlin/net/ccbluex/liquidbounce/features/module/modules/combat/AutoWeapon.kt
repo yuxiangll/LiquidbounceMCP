@@ -1,7 +1,7 @@
 package net.ccbluex.liquidbounce.features.module.modules.combat
 
 import net.ccbluex.liquidbounce.event.AttackEvent
-import net.ccbluex.liquidbounce.event.EventTarget
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.PacketEvent
 import net.ccbluex.liquidbounce.event.UpdateEvent
 import net.ccbluex.liquidbounce.features.module.Module
@@ -25,12 +25,12 @@ class AutoWeapon : Module() {
 
     private var spoofedSlot = 0
 
-    @EventTarget
+    @EventHandler
     fun onAttack(event: AttackEvent) {
         attackEnemy = true
     }
 
-    @EventTarget
+    @EventHandler
     fun onPacket(event: PacketEvent) {
         if (event.packet is C02PacketUseEntity && event.packet.action == C02PacketUseEntity.Action.ATTACK
                 && attackEnemy) {
@@ -63,7 +63,7 @@ class AutoWeapon : Module() {
         }
     }
 
-    @EventTarget
+    @EventHandler
     fun onUpdate(update: UpdateEvent) {
         // Switch back to old item after some time
         if (spoofedSlot > 0) {

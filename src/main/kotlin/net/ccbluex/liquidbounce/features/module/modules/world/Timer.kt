@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.world
 
-import net.ccbluex.liquidbounce.event.EventTarget
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.UpdateEvent
 import net.ccbluex.liquidbounce.event.WorldEvent
 import net.ccbluex.liquidbounce.features.module.Module
@@ -23,7 +23,7 @@ class Timer : Module() {
         mc.timer.timerSpeed = 1F
     }
 
-    @EventTarget
+    @EventHandler
     fun onUpdate(event: UpdateEvent) {
         if(MovementUtils.isMoving() || !onMoveValue.get()) {
             mc.timer.timerSpeed = speedValue.get()
@@ -33,7 +33,7 @@ class Timer : Module() {
         mc.timer.timerSpeed = 1F
     }
 
-    @EventTarget
+    @EventHandler
     fun onWorld(event: WorldEvent) {
         if (event.worldClient != null)
             return

@@ -1820,7 +1820,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
 
         this.mc.mcProfiler.endStartSection("render3DEvent");
 
-        LiquidBounce.eventManager.callEvent(new Render3DEvent(partialTicks));
+        LiquidBounce.eventBus.post(new Render3DEvent(partialTicks));
 
         this.mc.mcProfiler.endStartSection("hand");
 

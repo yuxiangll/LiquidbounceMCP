@@ -1,7 +1,7 @@
 package net.ccbluex.liquidbounce.features.module.modules.misc;
 
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.UpdateEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
@@ -47,7 +47,7 @@ public class Spammer extends Module {
     private final MSTimer msTimer = new MSTimer();
     private long delay = TimeUtils.randomDelay(minDelayValue.get(), maxDelayValue.get());
 
-    @EventTarget
+    @EventHandler
     public void onUpdate(UpdateEvent event) {
         if(msTimer.hasTimePassed(delay)) {
             mc.thePlayer.sendChatMessage(customValue.get() ? replace(messageValue.get()) : messageValue.get() + " >" + RandomUtils.randomString(5 + new Random().nextInt(5)) + "<");

@@ -2,10 +2,9 @@ package net.ccbluex.liquidbounce
 
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
+import meteordevelopment.orbit.EventBus
 import net.ccbluex.liquidbounce.cape.CapeAPI.registerCapeService
-import net.ccbluex.liquidbounce.discord.ClientRichPresence
 import net.ccbluex.liquidbounce.event.ClientShutdownEvent
-import net.ccbluex.liquidbounce.event.EventManager
 import net.ccbluex.liquidbounce.features.command.CommandManager
 import net.ccbluex.liquidbounce.features.module.ModuleManager
 import net.ccbluex.liquidbounce.features.special.AntiForge
@@ -21,6 +20,7 @@ import net.ccbluex.liquidbounce.ui.client.altmanager.GuiAltManager
 import net.ccbluex.liquidbounce.ui.client.clickgui.ClickGui
 import net.ccbluex.liquidbounce.ui.client.hud.HUD
 import net.ccbluex.liquidbounce.ui.client.hud.HUD.Companion.createDefault
+import net.ccbluex.liquidbounce.ui.client.lunar.ui.MainMenu
 //import net.ccbluex.liquidbounce.ui.client.lunar.ui.MainMenu
 import net.ccbluex.liquidbounce.ui.font.Fonts
 import net.ccbluex.liquidbounce.utils.ClassUtils.hasForge
@@ -31,6 +31,8 @@ import net.ccbluex.liquidbounce.utils.misc.HttpUtils
 import net.minecraft.client.gui.GuiScreen
 import net.minecraft.util.ResourceLocation
 import org.apache.logging.log4j.Logger
+import java.lang.invoke.MethodHandles
+import java.lang.reflect.Method
 
 object LiquidBounce {
 
@@ -47,9 +49,10 @@ object LiquidBounce {
     // Managers
     lateinit var moduleManager: ModuleManager
     lateinit var commandManager: CommandManager
-    lateinit var eventManager: EventManager
     lateinit var fileManager: FileManager
     lateinit var scriptManager: ScriptManager
+
+    lateinit var eventBus: EventBus
 
     // HUD & ClickGUI
     lateinit var hud: HUD
@@ -62,8 +65,6 @@ object LiquidBounce {
     // Menu Background
     var background: ResourceLocation? = null
 
-    // Discord RPC
-    private lateinit var clientRichPresence: ClientRichPresence
 
     lateinit var guiMain: GuiScreen
 
@@ -78,15 +79,21 @@ object LiquidBounce {
         // Create file manager
         fileManager = FileManager()
 
-        // Crate event manager
-        eventManager = EventManager()
+        // Crate event bus
+        eventBus = EventBus()
 
-        // Register listeners
-        eventManager.registerListener(RotationUtils())
-        eventManager.registerListener(AntiForge())
-        eventManager.registerListener(BungeeCordSpoof())
-        eventManager.registerListener(DonatorCape())
-        eventManager.registerListener(InventoryUtils())
+        // Register lambdaFactory
+        eventBus.registerLambdaFactory( "net.ccbluex.liquidbounce") { lookupInMethod: Method, klass: Class<*> ->
+            lookupInMethod(null, klass, MethodHandles.lookup()) as MethodHandles.Lookup
+        }
+
+        eventBus.subscribe(RotationUtils())
+        eventBus.subscribe(AntiForge())
+        eventBus.subscribe(BungeeCordSpoof())
+        eventBus.subscribe(DonatorCape())
+        eventBus.subscribe(InventoryUtils())
+
+
 
         // Create command manager
         commandManager = CommandManager()
@@ -133,14 +140,6 @@ object LiquidBounce {
             ClientUtils.getLogger().error("Failed to register cape service", throwable)
         }
 
-        // Setup Discord RPC
-        try {
-            clientRichPresence = ClientRichPresence()
-            clientRichPresence.setup()
-        } catch (throwable: Throwable) {
-            ClientUtils.getLogger().error("Failed to setup Discord RPC.", throwable)
-        }
-
         // Set HUD
         hud = createDefault()
         fileManager.loadConfig(fileManager.hudConfig)
@@ -165,8 +164,9 @@ object LiquidBounce {
         // Load generators
         GuiAltManager.loadGenerators()
 
-        guiMain = GuiMainMenu()
-        //guiMain = MainMenu()
+        //guiMain = GuiMainMenu()
+
+        guiMain = MainMenu()
 
         // Set is starting status
         isStarting = false
@@ -177,13 +177,11 @@ object LiquidBounce {
      */
     fun stopClient() {
         // Call client shutdown
-        eventManager.callEvent(ClientShutdownEvent()) // pass
+        eventBus.post(ClientShutdownEvent())
 
         // Save all available configs
         fileManager.saveAllConfigs()
 
-        // Shutdown discord rpc
-        clientRichPresence.shutdown()
     }
 
 }

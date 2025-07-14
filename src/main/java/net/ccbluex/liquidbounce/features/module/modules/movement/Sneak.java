@@ -1,7 +1,7 @@
 package net.ccbluex.liquidbounce.features.module.modules.movement;
 
 import net.ccbluex.liquidbounce.event.EventState;
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.MotionEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
@@ -39,7 +39,7 @@ public class Sneak extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onMotion(final MotionEvent event) {
         if(stopMoveValue.get() && MovementUtils.isMoving()) {
             if(sneaked) {

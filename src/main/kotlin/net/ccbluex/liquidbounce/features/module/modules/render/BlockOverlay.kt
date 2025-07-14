@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.render
 
-import net.ccbluex.liquidbounce.event.EventTarget
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.Render2DEvent
 import net.ccbluex.liquidbounce.event.Render3DEvent
 import net.ccbluex.liquidbounce.features.module.Module
@@ -38,7 +38,7 @@ class BlockOverlay : Module() {
             return null
         }
 
-    @EventTarget
+    @EventHandler
     fun onRender3D(event: Render3DEvent) {
         val blockPos = currentBlock ?: return
         val block = mc.theWorld.getBlockState(blockPos).block ?: return
@@ -71,7 +71,7 @@ class BlockOverlay : Module() {
         GlStateManager.resetColor()
     }
 
-    @EventTarget
+    @EventHandler
     fun onRender2D(event: Render2DEvent) {
         if (infoValue.get()) {
             val blockPos = currentBlock ?: return

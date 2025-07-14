@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.combat;
 
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.Render3DEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
@@ -55,7 +55,7 @@ public class AutoArmor extends Module {
 
     private long delay;
 
-    @EventTarget
+    @EventHandler
     public void onRender3D(final Render3DEvent event) {
         if (!InventoryUtils.CLICK_TIMER.hasTimePassed(delay) ||
                 (mc.thePlayer.openContainer != null && mc.thePlayer.openContainer.windowId != 0))

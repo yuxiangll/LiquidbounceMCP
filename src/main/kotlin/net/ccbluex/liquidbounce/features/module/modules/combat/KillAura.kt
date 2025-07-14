@@ -1,5 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.combat
 
+import meteordevelopment.orbit.EventHandler
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.event.*
 import net.ccbluex.liquidbounce.features.module.Module
@@ -200,7 +201,7 @@ class KillAura : Module() {
     /**
      * Motion event
      */
-    @EventTarget
+    @EventHandler
     fun onMotion(event: MotionEvent) {
         if (event.eventState == EventState.POST) {
             target ?: return
@@ -223,7 +224,7 @@ class KillAura : Module() {
     /**
      * Strafe event
      */
-    @EventTarget
+    @EventHandler
     fun onStrafe(event: StrafeEvent) {
         if (rotationStrafeValue.get().equals("Off", true))
             return
@@ -291,7 +292,7 @@ class KillAura : Module() {
     /**
      * Update event
      */
-    @EventTarget
+    @EventHandler
     fun onUpdate(event: UpdateEvent) {
         if (cancelRun) {
             target = null
@@ -321,7 +322,7 @@ class KillAura : Module() {
     /**
      * Render event
      */
-    @EventTarget
+    @EventHandler
     fun onRender3D(event: Render3DEvent) {
         if (cancelRun) {
             target = null
@@ -356,7 +357,7 @@ class KillAura : Module() {
     /**
      * Handle entity move
      */
-    @EventTarget
+    @EventHandler
     fun onEntityMove(event: EntityMovementEvent) {
         val movedEntity = event.movedEntity
 
@@ -511,7 +512,7 @@ class KillAura : Module() {
         }
 
         // Call attack event
-        LiquidBounce.eventManager.callEvent(AttackEvent(entity))
+        LiquidBounce.eventBus.post(AttackEvent(entity))
 
         // Attack target
         if (swingValue.get())

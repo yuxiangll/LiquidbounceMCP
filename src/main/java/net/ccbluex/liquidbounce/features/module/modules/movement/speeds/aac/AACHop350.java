@@ -1,15 +1,16 @@
 package net.ccbluex.liquidbounce.features.module.modules.movement.speeds.aac;
 
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.*;
 import net.ccbluex.liquidbounce.features.module.modules.movement.speeds.SpeedMode;
 import net.ccbluex.liquidbounce.utils.MovementUtils;
 
-public class AACHop350 extends SpeedMode implements Listenable {
+public class AACHop350 extends SpeedMode {
     public AACHop350() {
         super("AACHop3.5.0");
 
-        LiquidBounce.eventManager.registerListener(this);
+        //LiquidBounce.eventBus.subscribe(this);
     }
 
     @Override
@@ -24,7 +25,7 @@ public class AACHop350 extends SpeedMode implements Listenable {
     public void onMove(final MoveEvent event) {
     }
 
-    @EventTarget
+    @EventHandler
     public void onMotion(final MotionEvent event) {
         if(event.getEventState() == EventState.POST && MovementUtils.isMoving() && !mc.thePlayer.isInWater() && !mc.thePlayer.isInLava()) {
             mc.thePlayer.jumpMovementFactor += 0.00208F;
@@ -55,8 +56,5 @@ public class AACHop350 extends SpeedMode implements Listenable {
         mc.thePlayer.jumpMovementFactor = 0.02F;
     }
 
-    @Override
-    public boolean handleEvents() {
-        return isActive();
-    }
+
 }

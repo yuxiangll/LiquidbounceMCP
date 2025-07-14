@@ -1,5 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.world;
 
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.*;
 import net.ccbluex.liquidbounce.features.module.Module;
@@ -98,7 +99,7 @@ public class Tower extends Module {
             mc.getNetHandler().addToSendQueue(new C09PacketHeldItemChange(mc.thePlayer.inventory.currentItem));
     }
 
-    @EventTarget
+    @EventHandler
     public void onMotion(final MotionEvent event) {
         if (onJumpValue.get() && !mc.gameSettings.keyBindJump.isKeyDown())
             return;
@@ -344,7 +345,7 @@ public class Tower extends Module {
         return true;
     }
 
-    @EventTarget
+    @EventHandler
     public void onPacket(final PacketEvent event) {
         if(mc.thePlayer == null)
             return;
@@ -363,7 +364,7 @@ public class Tower extends Module {
      *
      * @param event
      */
-    @EventTarget
+    @EventHandler
     public void onRender2D(final Render2DEvent event) {
         if(counterDisplayValue.get()) {
             GlStateManager.pushMatrix();
@@ -387,7 +388,7 @@ public class Tower extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onJump(final JumpEvent event) {
         if (onJumpValue.get())
             event.cancelEvent();

@@ -1,7 +1,6 @@
 package net.ccbluex.liquidbounce.features.special;
 
-import net.ccbluex.liquidbounce.event.EventTarget;
-import net.ccbluex.liquidbounce.event.Listenable;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.PacketEvent;
 import net.ccbluex.liquidbounce.utils.MinecraftInstance;
 import net.minecraft.network.EnumConnectionState;
@@ -11,11 +10,11 @@ import net.minecraft.network.handshake.client.C00Handshake;
 import java.text.MessageFormat;
 import java.util.Random;
 
-public class BungeeCordSpoof extends MinecraftInstance implements Listenable {
+public class BungeeCordSpoof extends MinecraftInstance {
 
     public static boolean enabled = false;
 
-    @EventTarget
+    @EventHandler
     public void onPacket(PacketEvent event) {
         final Packet<?> packet = event.getPacket();
 
@@ -30,8 +29,4 @@ public class BungeeCordSpoof extends MinecraftInstance implements Listenable {
         return new Random().nextInt(2) + "" + new Random().nextInt(5) + "" + new Random().nextInt(5);
     }
 
-    @Override
-    public boolean handleEvents() {
-        return true;
-    }
 }

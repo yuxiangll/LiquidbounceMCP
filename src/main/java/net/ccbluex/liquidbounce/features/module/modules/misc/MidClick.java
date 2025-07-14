@@ -1,7 +1,7 @@
 package net.ccbluex.liquidbounce.features.module.modules.misc;
 
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.Render2DEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
@@ -18,7 +18,7 @@ public class MidClick extends Module {
 
     private boolean wasDown;
 
-    @EventTarget
+    @EventHandler
     public void onRender(Render2DEvent event) {
         if(mc.currentScreen != null)
             return;

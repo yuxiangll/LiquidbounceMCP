@@ -1,5 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.world
 
+import meteordevelopment.orbit.EventHandler
 import net.ccbluex.liquidbounce.event.*
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
@@ -31,7 +32,7 @@ class CivBreak : Module() {
     private val rangeResetValue = BoolValue("Range-Reset", true)
 
 
-    @EventTarget
+    @EventHandler
     fun onBlockClick(event: ClickBlockEvent) {
         if (BlockUtils.getBlock(event.clickedBlock) == Blocks.bedrock)
             return
@@ -44,7 +45,7 @@ class CivBreak : Module() {
         mc.netHandler.addToSendQueue(C07PacketPlayerDigging(C07PacketPlayerDigging.Action.STOP_DESTROY_BLOCK, blockPos, enumFacing))
     }
 
-    @EventTarget
+    @EventHandler
     fun onUpdate(event: MotionEvent) {
         val pos = blockPos ?: return
 
@@ -77,7 +78,7 @@ class CivBreak : Module() {
         }
     }
 
-    @EventTarget
+    @EventHandler
     fun onRender3D(event: Render3DEvent) {
         RenderUtils.drawBlockBox(blockPos ?: return, Color.RED, true)
     }

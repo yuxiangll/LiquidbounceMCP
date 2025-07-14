@@ -1,5 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.movement;
 
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.*;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
@@ -259,7 +260,7 @@ public class Fly extends Module {
         mc.thePlayer.speedInAir = 0.02F;
     }
 
-    @EventTarget
+    @EventHandler
     public void onUpdate(final UpdateEvent event) {
         final float vanillaSpeed = vanillaSpeedValue.get();
 
@@ -594,7 +595,7 @@ public class Fly extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onMotion(final MotionEvent event) {
         if(modeValue.get().equalsIgnoreCase("boosthypixel")) {
             switch(event.getEventState()) {
@@ -617,7 +618,7 @@ public class Fly extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onRender3D(final Render3DEvent event) {
         final String mode = modeValue.get();
 
@@ -638,7 +639,7 @@ public class Fly extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onPacket(PacketEvent event) {
         if(noPacketModify)
             return;
@@ -668,7 +669,7 @@ public class Fly extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onMove(final MoveEvent event) {
         switch(modeValue.get().toLowerCase()) {
             case "cubecraft": {
@@ -733,7 +734,7 @@ public class Fly extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onBB(final BlockBBEvent event) {
         if (mc.thePlayer == null) return;
 
@@ -745,7 +746,7 @@ public class Fly extends Module {
             event.setBoundingBox(AxisAlignedBB.fromBounds(event.getX(), event.getY(), event.getZ(), event.getX() + 1, mc.thePlayer.posY, event.getZ() + 1));
     }
 
-    @EventTarget
+    @EventHandler
     public void onJump(final JumpEvent e) {
         final String mode = modeValue.get();
 
@@ -754,7 +755,7 @@ public class Fly extends Module {
             e.cancelEvent();
     }
 
-    @EventTarget
+    @EventHandler
     public void onStep(final StepEvent e) {
         final String mode = modeValue.get();
 

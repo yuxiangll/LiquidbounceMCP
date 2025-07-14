@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.player
 
-import net.ccbluex.liquidbounce.event.EventTarget
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.UpdateEvent
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
@@ -70,7 +70,7 @@ class InventoryCleaner : Module() {
 
     private var delay = 0L
 
-    @EventTarget
+    @EventHandler
     fun onUpdate(event: UpdateEvent) {
         if (!InventoryUtils.CLICK_TIMER.hasTimePassed(delay) ||
                 mc.currentScreen !is GuiInventory && invOpenValue.get() ||

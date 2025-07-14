@@ -1,7 +1,7 @@
 package net.ccbluex.liquidbounce.features.module.modules.world
 
 import net.ccbluex.liquidbounce.LiquidBounce
-import net.ccbluex.liquidbounce.event.EventTarget
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.PacketEvent
 import net.ccbluex.liquidbounce.event.Render3DEvent
 import net.ccbluex.liquidbounce.features.module.Module
@@ -85,7 +85,7 @@ class ChestStealer : Module() {
 
     private var contentReceived = 0
 
-    @EventTarget
+    @EventHandler
     fun onRender3D(event: Render3DEvent?) {
         val screen = mc.currentScreen
 
@@ -144,7 +144,7 @@ class ChestStealer : Module() {
         }
     }
 
-    @EventTarget
+    @EventHandler
     private fun onPacket(event: PacketEvent) {
         val packet = event.packet
 

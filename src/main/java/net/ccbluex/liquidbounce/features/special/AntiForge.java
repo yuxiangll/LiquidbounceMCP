@@ -1,24 +1,20 @@
 package net.ccbluex.liquidbounce.features.special;
 
-import io.netty.buffer.Unpooled;
-import net.ccbluex.liquidbounce.event.EventTarget;
-import net.ccbluex.liquidbounce.event.Listenable;
+
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.PacketEvent;
-import net.ccbluex.liquidbounce.features.module.ModuleManager;
-import net.ccbluex.liquidbounce.features.module.modules.world.Scaffold;
 import net.ccbluex.liquidbounce.utils.MinecraftInstance;
 import net.minecraft.network.Packet;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.client.C17PacketCustomPayload;
 
-public class AntiForge extends MinecraftInstance implements Listenable {
+public class AntiForge extends MinecraftInstance{
 
     public static boolean enabled = true;
     public static boolean blockFML = true;
     public static boolean blockProxyPacket = true;
     public static boolean blockPayloadPackets = true;
 
-    @EventTarget
+    @EventHandler
     public void onPacket(PacketEvent event) {
         final Packet<?> packet = event.getPacket();
 
@@ -42,8 +38,5 @@ public class AntiForge extends MinecraftInstance implements Listenable {
         }
     }
 
-    @Override
-    public boolean handleEvents() {
-        return true;
-    }
+
 }

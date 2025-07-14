@@ -1,5 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.world;
 
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.*;
 import net.ccbluex.liquidbounce.features.module.Module;
@@ -158,12 +159,8 @@ public class Scaffold extends Module {
         launchY = (int) mc.thePlayer.posY;
     }
 
-    /**
-     * Update event
-     *
-     * @param event
-     */
-    @EventTarget
+
+    @EventHandler
     public void onUpdate(final UpdateEvent event) {
         mc.timer.timerSpeed = timerValue.get();
 
@@ -238,7 +235,7 @@ public class Scaffold extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onPacket(final PacketEvent event) {
         if (mc.thePlayer == null)
             return;
@@ -253,7 +250,7 @@ public class Scaffold extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onMotion(final MotionEvent event) {
         final EventState eventState = event.getEventState();
 
@@ -400,7 +397,7 @@ public class Scaffold extends Module {
      *
      * @param event
      */
-    @EventTarget
+    @EventHandler
     public void onMove(final MoveEvent event) {
         if (!safeWalkValue.get() || shouldGoDown)
             return;
@@ -414,7 +411,7 @@ public class Scaffold extends Module {
      *
      * @param event
      */
-    @EventTarget
+    @EventHandler
     public void onRender2D(final Render2DEvent event) {
         if (counterDisplayValue.get()) {
             GlStateManager.pushMatrix();
@@ -443,7 +440,7 @@ public class Scaffold extends Module {
      *
      * @param event
      */
-    @EventTarget
+    @EventHandler
     public void onRender3D(final Render3DEvent event) {
         if (!markValue.get())
             return;

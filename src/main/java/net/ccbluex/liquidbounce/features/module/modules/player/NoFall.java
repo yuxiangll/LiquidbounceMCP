@@ -1,5 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.player;
 
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.*;
 import net.ccbluex.liquidbounce.features.module.Module;
@@ -47,7 +48,7 @@ public class NoFall extends Module {
     private int currentMlgItemIndex;
     private BlockPos currentMlgBlock;
 
-    @EventTarget(ignoreCondition = true)
+    @EventHandler()
     public void onUpdate(UpdateEvent event) {
         if (mc.thePlayer.onGround)
             jumped = false;
@@ -133,7 +134,7 @@ public class NoFall extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onPacket(final PacketEvent event) {
         final Packet<?> packet = event.getPacket();
         final String mode = modeValue.get();
@@ -153,7 +154,7 @@ public class NoFall extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onMove(MoveEvent event) {
         if (BlockUtils.collideBlock(mc.thePlayer.getEntityBoundingBox(), block -> block instanceof BlockLiquid) || BlockUtils.collideBlock(new AxisAlignedBB(mc.thePlayer.getEntityBoundingBox().maxX, mc.thePlayer.getEntityBoundingBox().maxY, mc.thePlayer.getEntityBoundingBox().maxZ, mc.thePlayer.getEntityBoundingBox().minX, mc.thePlayer.getEntityBoundingBox().minY - 0.01D, mc.thePlayer.getEntityBoundingBox().minZ), block -> block instanceof BlockLiquid))
             return;
@@ -166,7 +167,7 @@ public class NoFall extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     private void onMotionUpdate(MotionEvent event) {
         if (!modeValue.get().equalsIgnoreCase("MLG"))
             return;
@@ -251,7 +252,7 @@ public class NoFall extends Module {
         }
     }
 
-    @EventTarget(ignoreCondition = true)
+    @EventHandler()
     public void onJump(final JumpEvent event) {
         jumped = true;
     }

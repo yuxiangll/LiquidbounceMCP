@@ -1,7 +1,7 @@
 package net.ccbluex.liquidbounce.features.module.modules.misc;
 
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.TextEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
@@ -29,7 +29,7 @@ public class NameProtect extends Module {
     public final BoolValue allPlayersValue = new BoolValue("AllPlayers", false);
     public final BoolValue skinProtectValue = new BoolValue("SkinProtect", true);
 
-    @EventTarget(ignoreCondition = true)
+    @EventHandler()
     public void onText(final TextEvent event) {
         if(mc.thePlayer == null || event.getText().contains("§8[§9§l" + LiquidBounce.CLIENT_NAME + "§8] §3"))
             return;

@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.movement;
 
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.JumpEvent;
 import net.ccbluex.liquidbounce.event.UpdateEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
@@ -18,7 +18,7 @@ public class ReverseStep extends Module {
 
     private boolean jumped;
 
-    @EventTarget(ignoreCondition = true)
+    @EventHandler
     public void onUpdate(UpdateEvent event) {
         if(mc.thePlayer.onGround)
             jumped = false;
@@ -36,7 +36,7 @@ public class ReverseStep extends Module {
             mc.thePlayer.motionY = -motionValue.get();
     }
 
-    @EventTarget(ignoreCondition = true)
+    @EventHandler
     public void onJump(JumpEvent event) {
         jumped = true;
     }

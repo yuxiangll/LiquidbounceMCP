@@ -1,7 +1,7 @@
 package net.ccbluex.liquidbounce.features.module.modules.render;
 
 import co.uk.hexeption.utils.OutlineUtils;
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.Render2DEvent;
 import net.ccbluex.liquidbounce.event.Render3DEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
@@ -35,7 +35,7 @@ public class StorageESP extends Module {
     private final BoolValue dispenserValue = new BoolValue("Dispenser", true);
     private final BoolValue hopperValue = new BoolValue("Hopper", true);
 
-    @EventTarget
+    @EventHandler
     public void onRender3D(Render3DEvent event) {
         try {
             final String mode = modeValue.get();
@@ -179,7 +179,7 @@ public class StorageESP extends Module {
         }
     }
 
-    @EventTarget
+    @EventHandler
     public void onRender2D(final Render2DEvent event) {
         final String mode = modeValue.get();
 

@@ -1,7 +1,7 @@
 package net.ccbluex.liquidbounce.features.module.modules.movement;
 
 import net.ccbluex.liquidbounce.event.ClickWindowEvent;
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.UpdateEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
@@ -29,7 +29,7 @@ public class InventoryMove extends Module {
 	public BoolValue aacAdditionProValue = new BoolValue("AACAdditionPro", false);
 	private BoolValue noMoveClicksValue = new BoolValue("NoMoveClicks", false);
 
-	@EventTarget
+	@EventHandler
 	public void onUpdate(UpdateEvent event) {
 		if (!(mc.currentScreen instanceof GuiChat) && !(mc.currentScreen instanceof GuiIngameMenu) && (!noDetectableValue.get() || !(mc.currentScreen instanceof GuiContainer))) {
 			mc.gameSettings.keyBindForward.pressed = GameSettings.isKeyDown(mc.gameSettings.keyBindForward);
@@ -41,7 +41,7 @@ public class InventoryMove extends Module {
 		}
 	}
 
-	@EventTarget
+	@EventHandler
 	public void onClick(ClickWindowEvent event) {
 		if (noMoveClicksValue.get() && MovementUtils.isMoving()){
 			event.cancelEvent();

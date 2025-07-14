@@ -2,7 +2,7 @@ package net.ccbluex.liquidbounce.features.module.modules.render;
 
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.ClientShutdownEvent;
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.UpdateEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
@@ -32,7 +32,7 @@ public class Fullbright extends Module {
         if(mc.thePlayer != null) mc.thePlayer.removePotionEffectClient(Potion.nightVision.id);
     }
 
-    @EventTarget(ignoreCondition = true)
+    @EventHandler()
     public void onUpdate(final UpdateEvent event) {
         if (getState() || LiquidBounce.moduleManager.getModule(XRay.class).getState()) {
             switch(modeValue.get().toLowerCase()) {
@@ -50,7 +50,7 @@ public class Fullbright extends Module {
         }
     }
 
-    @EventTarget(ignoreCondition = true)
+    @EventHandler()
     public void onShutdown(final ClientShutdownEvent event) {
         onDisable();
     }

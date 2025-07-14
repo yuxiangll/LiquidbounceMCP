@@ -1,7 +1,7 @@
 package net.ccbluex.liquidbounce.features.module.modules.render;
 
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.PacketEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
@@ -63,7 +63,7 @@ public class ClickGUI extends Module {
         }
     }
 
-    @EventTarget(ignoreCondition = true)
+    @EventHandler()
     public void onPacket(final PacketEvent event) {
         final Packet packet = event.getPacket();
 

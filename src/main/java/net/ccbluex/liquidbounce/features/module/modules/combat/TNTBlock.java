@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.combat;
 
-import net.ccbluex.liquidbounce.event.EventTarget;
+import meteordevelopment.orbit.EventHandler;
 import net.ccbluex.liquidbounce.event.MotionEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
@@ -23,7 +23,7 @@ public class TNTBlock extends Module {
 
     private boolean blocked;
 
-    @EventTarget
+    @EventHandler
     public void onMotionUpdate(MotionEvent event) {
         for(final Entity entity : mc.theWorld.loadedEntityList) {
             if(entity instanceof EntityTNTPrimed && mc.thePlayer.getDistanceToEntity(entity) <= rangeValue.get()) {

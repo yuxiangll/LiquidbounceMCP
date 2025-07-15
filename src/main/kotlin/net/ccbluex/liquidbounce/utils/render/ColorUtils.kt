@@ -86,4 +86,47 @@ object ColorUtils {
         val currentColor = Color(Color.HSBtoRGB((System.nanoTime() + offset) / 10000000000F % 1, 1F, 1F))
         return Color(currentColor.red / 255F * 1F, currentColor.green / 255f * 1F, currentColor.blue / 255F * 1F, alpha)
     }
+
+
+    /**
+     * @param startColor int
+     * @param endColor   int
+     * @param size       int
+     * @return int[]
+     * @author 来自GPT的神秘力量
+     */
+    @JvmStatic
+    fun generateGradientColors(startColor: Int, endColor: Int, size: Int): IntArray {
+        val gradientColors = IntArray(size)
+
+        val startColorC = Color(startColor)
+        val endColorC = Color(endColor)
+
+        // 提取起始颜色和结束颜色的RGB值
+
+        // 计算颜色差值
+        val redDiff = endColorC.red - startColorC.red
+        val greenDiff = endColorC.green - startColorC.green
+        val blueDiff = endColorC.blue - startColorC.blue
+
+        // 计算每一步的颜色增量
+        val redStep = redDiff.toDouble() / (size - 1)
+        val greenStep = greenDiff.toDouble() / (size - 1)
+        val blueStep = blueDiff.toDouble() / (size - 1)
+
+        // 生成渐变色数组
+        for (i in 0..<size) {
+            val red = (startColorC.red + redStep * i).toInt()
+            val green = (startColorC.green + greenStep * i).toInt()
+            val blue = (startColorC.blue + blueStep * i).toInt()
+
+            gradientColors[i] = Color(red, green, blue).rgb
+        }
+
+        return gradientColors
+    }
+
+
+
+
 }

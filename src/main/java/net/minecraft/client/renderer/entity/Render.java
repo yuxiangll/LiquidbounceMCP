@@ -364,7 +364,7 @@ public abstract class Render<T extends Entity> implements IEntityRenderer
                 i = -10;
             }
 
-            int j = fontrenderer.getStringWidth(str) / 2;
+            int j = (int) (fontrenderer.getStringWidth(str) / 2);
             GlStateManager.disableTexture2D();
             worldrenderer.begin(7, DefaultVertexFormats.POSITION_COLOR);
             worldrenderer.pos((double)(-j - 1), (double)(-1 + i), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();

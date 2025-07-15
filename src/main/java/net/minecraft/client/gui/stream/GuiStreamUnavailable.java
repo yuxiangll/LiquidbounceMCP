@@ -80,13 +80,13 @@ public class GuiStreamUnavailable extends GuiScreen
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         this.drawDefaultBackground();
-        int i = Math.max((int)((double)this.height * 0.85D / 2.0D - (double)((float)(this.field_152323_r.size() * this.fontRendererObj.FONT_HEIGHT) / 2.0F)), 50);
-        this.drawCenteredString(this.fontRendererObj, this.field_152324_f.getFormattedText(), this.width / 2, i - this.fontRendererObj.FONT_HEIGHT * 2, 16777215);
+        int i = Math.max((int)((double)this.height * 0.85D / 2.0D - (double)((float)(this.field_152323_r.size() * this.fontRendererObj.getHeight()) / 2.0F)), 50);
+        this.drawCenteredString(this.fontRendererObj, this.field_152324_f.getFormattedText(), this.width / 2, (int) (i - this.fontRendererObj.getHeight() * 2), 16777215);
 
         for (String s : this.field_152323_r)
         {
             this.drawCenteredString(this.fontRendererObj, s, this.width / 2, i, 10526880);
-            i += this.fontRendererObj.FONT_HEIGHT;
+            i += this.fontRendererObj.getHeight();
         }
 
         super.drawScreen(mouseX, mouseY, partialTicks);

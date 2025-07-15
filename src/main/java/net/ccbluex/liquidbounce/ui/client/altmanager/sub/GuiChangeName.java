@@ -3,11 +3,7 @@ package net.ccbluex.liquidbounce.ui.client.altmanager.sub;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.SessionEvent;
 import net.ccbluex.liquidbounce.ui.client.altmanager.GuiAltManager;
-import net.ccbluex.liquidbounce.ui.font.Fonts;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.GuiTextField;
+import net.minecraft.client.gui.*;
 import net.minecraft.util.Session;
 import org.lwjgl.input.Keyboard;
 
@@ -28,7 +24,7 @@ public class GuiChangeName extends GuiScreen {
         buttonList.add(new GuiButton(1, width / 2 - 100, height / 4 + 96, "Change"));
         buttonList.add(new GuiButton(0, width / 2 - 100, height / 4 + 120, "Back"));
 
-        name = new GuiTextField(2, Fonts.font40, width / 2 - 100, 60, 200, 20);
+        name = new GuiTextField(2, (FontRenderer) LiquidBounce.fontManager.PingFang20, width / 2 - 100, 60, 200, 20);
         name.setFocused(true);
         name.setText(mc.getSession().getUsername());
         name.setMaxStringLength(16);
@@ -38,13 +34,12 @@ public class GuiChangeName extends GuiScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         drawBackground(0);
         Gui.drawRect(30, 30, width - 30, height - 30, Integer.MIN_VALUE);
-
-        drawCenteredString(Fonts.font40, "Change Name", width / 2, 34, 0xffffff);
-        drawCenteredString(Fonts.font40, status == null ? "" : status, width / 2, height / 4 + 84, 0xffffff);
+        LiquidBounce.fontManager.PingFang20.drawCenteredString("Change Name", width / 2, 34, 0xffffff);
+        LiquidBounce.fontManager.PingFang20.drawCenteredString(status == null ? "" : status, width / 2, height / 4 + 84, 0xffffff);
         name.drawTextBox();
 
         if(name.getText().isEmpty() && !name.isFocused())
-            drawCenteredString(Fonts.font40, "§7Username", width / 2 - 74, 66, 0xffffff);
+            LiquidBounce.fontManager.PingFang20.drawCenteredString("§7Username", width / 2 - 74, 66, 0xffffff);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }

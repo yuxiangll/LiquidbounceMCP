@@ -17,7 +17,7 @@ public abstract class GuiResourcePackList extends GuiListExtended
         this.mc = mcIn;
         this.field_148204_l = p_i45055_4_;
         this.field_148163_i = false;
-        this.setHasListHeader(true, (int)((float)mcIn.fontRendererObj.FONT_HEIGHT * 1.5F));
+        this.setHasListHeader(true, (int)((float)mcIn.fontRendererObj.getHeight() * 1.5F));
     }
 
     protected void drawListHeader(int p_148129_1_, int p_148129_2_, Tessellator p_148129_3_)

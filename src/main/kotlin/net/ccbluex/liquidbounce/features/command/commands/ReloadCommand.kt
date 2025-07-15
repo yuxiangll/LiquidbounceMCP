@@ -4,7 +4,7 @@ import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.features.command.Command
 import net.ccbluex.liquidbounce.features.command.CommandManager
 import net.ccbluex.liquidbounce.ui.client.clickgui.ClickGui
-import net.ccbluex.liquidbounce.ui.font.Fonts
+import net.ccbluex.liquidbounce.ui.font.FontManager
 
 class ReloadCommand : Command("reload", arrayOf("configreload")) {
     /**
@@ -24,7 +24,10 @@ class ReloadCommand : Command("reload", arrayOf("configreload")) {
         LiquidBounce.scriptManager.loadScripts()
         LiquidBounce.scriptManager.enableScripts()
         chat("§c§lReloading fonts...")
-        Fonts.loadFonts()
+
+        //TODO font reload
+        LiquidBounce.fontManager = FontManager()
+        //Fonts.loadFonts()
         chat("§c§lReloading modules...")
         LiquidBounce.fileManager.loadConfig(LiquidBounce.fileManager.modulesConfig)
         LiquidBounce.isStarting = false

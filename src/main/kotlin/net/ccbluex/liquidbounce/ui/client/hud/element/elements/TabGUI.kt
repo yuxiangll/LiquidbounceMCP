@@ -7,15 +7,12 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.Border
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo
 import net.ccbluex.liquidbounce.ui.client.hud.element.Side
-import net.ccbluex.liquidbounce.ui.font.AWTFontRenderer
-import net.ccbluex.liquidbounce.ui.font.Fonts
+import net.ccbluex.liquidbounce.ui.font.AbstractFontRenderer
 import net.ccbluex.liquidbounce.utils.render.RenderUtils
 import net.ccbluex.liquidbounce.utils.render.shader.shaders.RainbowShader
 import net.ccbluex.liquidbounce.value.BoolValue
 import net.ccbluex.liquidbounce.value.FloatValue
-import net.ccbluex.liquidbounce.value.FontValue
 import net.ccbluex.liquidbounce.value.IntegerValue
-import net.minecraft.client.gui.FontRenderer
 import net.minecraft.client.renderer.GlStateManager
 import org.lwjgl.input.Keyboard
 import java.awt.Color
@@ -42,7 +39,6 @@ class TabGUI(x: Double = 5.0, y: Double = 25.0) : Element(x = x, y = y) {
     private val borderAlphaValue = IntegerValue("Border Alpha", 150, 0, 255)
     private val borderRainbow = BoolValue("Border Rainbow", false)
     private val arrowsValue = BoolValue("Arrows", true)
-    private val fontValue = FontValue("Font", Fonts.font35)
     private val textShadow = BoolValue("TextShadow", false)
     private val textFade = BoolValue("TextFade", true)
     private val textPositionY = FloatValue("TextPosition-Y", 2F, 0F, 5F)
@@ -74,9 +70,8 @@ class TabGUI(x: Double = 5.0, y: Double = 25.0) : Element(x = x, y = y) {
     override fun drawElement(): Border? {
         updateAnimation()
 
-        AWTFontRenderer.assumeNonVolatile = true
 
-        val fontRenderer = fontValue.get()
+        val fontRenderer = LiquidBounce.fontManager.PingFang18
 
         val rectangleRainbowEnabled = rectangleRainbow.get()
 
@@ -160,7 +155,6 @@ class TabGUI(x: Double = 5.0, y: Double = 25.0) : Element(x = x, y = y) {
             y += tabHeight.get()
         }
 
-        AWTFontRenderer.assumeNonVolatile = false
 
         return Border(1F, 0F, width.get(), guiHeight)
     }
@@ -291,7 +285,7 @@ class TabGUI(x: Double = 5.0, y: Double = 25.0) : Element(x = x, y = y) {
         var textFade = 0F
 
         fun drawTab(x: Float, y: Float, color: Int, backgroundColor: Int, borderColor: Int, borderStrength: Float,
-                    upperCase: Boolean, fontRenderer: FontRenderer, borderRainbow: Boolean, rectRainbow: Boolean) {
+                    upperCase: Boolean, fontRenderer: AbstractFontRenderer, borderRainbow: Boolean, rectRainbow: Boolean) {
             var maxWidth = 0
 
             for (module in modules)

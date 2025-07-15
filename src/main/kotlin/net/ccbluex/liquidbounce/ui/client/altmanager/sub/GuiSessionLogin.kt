@@ -1,10 +1,11 @@
 package net.ccbluex.liquidbounce.ui.client.altmanager.sub
 
+import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.ui.client.altmanager.GuiAltManager
-import net.ccbluex.liquidbounce.ui.font.Fonts
 import net.ccbluex.liquidbounce.utils.ClientUtils
 import net.ccbluex.liquidbounce.utils.login.LoginUtils
 import net.mcleaks.MCLeaks
+import net.minecraft.client.gui.FontRenderer
 import net.minecraft.client.gui.Gui
 import net.minecraft.client.gui.GuiButton
 import net.minecraft.client.gui.GuiScreen
@@ -41,7 +42,7 @@ class GuiSessionLogin(private val prevGui: GuiAltManager) : GuiScreen() {
         buttonList.add(GuiButton(0, width / 2 - 100, height / 4 + 120, "Back"))
 
         // Add fields to screen
-        sessionTokenField = GuiTextField(666, Fonts.font40, width / 2 - 100, 80, 200, 20)
+        sessionTokenField = GuiTextField(666, LiquidBounce.fontManager.PingFang20 as FontRenderer, width / 2 - 100, 80, 200, 20)
         sessionTokenField.isFocused = true
         sessionTokenField.maxStringLength = Integer.MAX_VALUE
         sessionTokenField
@@ -59,13 +60,12 @@ class GuiSessionLogin(private val prevGui: GuiAltManager) : GuiScreen() {
         Gui.drawRect(30, 30, width - 30, height - 30, Integer.MIN_VALUE)
 
         // Draw title and status
-        drawCenteredString(Fonts.font35, "Session Login", width / 2, 36, 0xffffff)
-        drawCenteredString(Fonts.font35, status, width / 2, height / 4 + 80, 0xffffff)
+        LiquidBounce.fontManager.PingFang18.drawCenteredString("Session Login", width / 2, 36, 0xffffff)
+        LiquidBounce.fontManager.PingFang18.drawCenteredString(status, width / 2, height / 4 + 80, 0xffffff)
 
         // Draw fields
         sessionTokenField.drawTextBox()
-
-        drawCenteredString(Fonts.font40, "§7Session Token:", width / 2 - 65, 66, 0xffffff)
+        LiquidBounce.fontManager.PingFang20.drawCenteredString( "§7Session Token:", width / 2 - 65, 66, 0xffffff)
 
         // Call sub method
         super.drawScreen(mouseX, mouseY, partialTicks)

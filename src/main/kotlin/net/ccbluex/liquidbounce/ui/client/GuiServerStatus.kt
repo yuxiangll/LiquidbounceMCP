@@ -1,7 +1,7 @@
 package net.ccbluex.liquidbounce.ui.client
 
 import com.google.gson.Gson
-import net.ccbluex.liquidbounce.ui.font.Fonts
+import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.utils.misc.HttpUtils
 import net.minecraft.client.gui.Gui
 import net.minecraft.client.gui.GuiButton
@@ -25,19 +25,19 @@ class GuiServerStatus(private val prevGui: GuiScreen) : GuiScreen() {
         drawBackground(0)
 
         var i = height / 4 + 40
-        Gui.drawRect(width / 2 - 115, i - 5, width / 2 + 115, height / 4 + 43 + if (status.keys.isEmpty()) 10 else status.keys.size * Fonts.font40.FONT_HEIGHT, Integer.MIN_VALUE)
+        Gui.drawRect(width / 2 - 115, i - 5, width / 2 + 115, height / 4 + 43 + if (status.keys.isEmpty()) 10 else status.keys.size * LiquidBounce.fontManager.PingFang20.height.toInt(), Integer.MIN_VALUE)
 
         if (status.isEmpty()) {
-            drawCenteredString(Fonts.font40, "Loading...", width / 2, height / 4 + 40, Color.WHITE.rgb)
+            LiquidBounce.fontManager.PingFang20.drawCenteredString("Loading...", width / 2, height / 4 + 40, Color.WHITE.rgb)
         } else {
             for (server in status.keys) {
                 val color = status[server]
-                drawCenteredString(Fonts.font40, "§c§l$server: ${if (color.equals("red", ignoreCase = true)) "§c" else if (color.equals("yellow", ignoreCase = true)) "§e" else "§a"}${if (color.equals("red", ignoreCase = true)) "Offline" else if (color.equals("yellow", ignoreCase = true)) "Slow" else "Online"}", width / 2, i, Color.WHITE.rgb)
-                i += Fonts.font40.FONT_HEIGHT
+                LiquidBounce.fontManager.PingFang20.drawCenteredString("§c§l$server: ${if (color.equals("red", ignoreCase = true)) "§c" else if (color.equals("yellow", ignoreCase = true)) "§e" else "§a"}${if (color.equals("red", ignoreCase = true)) "Offline" else if (color.equals("yellow", ignoreCase = true)) "Slow" else "Online"}", width / 2, i, Color.WHITE.rgb)
+                i += LiquidBounce.fontManager.PingFang20.height.toInt()
             }
         }
 
-        Fonts.fontBold180.drawCenteredString("Server Status", this.width / 2F, height / 8f + 5F, 4673984, true)
+        LiquidBounce.fontManager.PingFangBold90.drawCenteredStringWithShadow("Server Status", this.width / 2F, height / 8f + 5F, 4673984)
 
         super.drawScreen(mouseX, mouseY, partialTicks)
     }

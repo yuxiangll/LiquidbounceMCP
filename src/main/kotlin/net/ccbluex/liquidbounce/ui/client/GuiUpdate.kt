@@ -1,7 +1,6 @@
 package net.ccbluex.liquidbounce.ui.client
 
 import net.ccbluex.liquidbounce.LiquidBounce
-import net.ccbluex.liquidbounce.ui.font.Fonts
 import net.ccbluex.liquidbounce.utils.misc.MiscUtils
 import net.minecraft.client.gui.GuiButton
 import net.minecraft.client.gui.GuiScreen
@@ -20,15 +19,14 @@ class GuiUpdate : GuiScreen() {
 
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
         drawBackground(0)
-
-        drawCenteredString(Fonts.font35, "b${LiquidBounce.latestVersion} got released!", width / 2, height / 8 + 80, 0xffffff)
-        drawCenteredString(Fonts.font35, "Press \"Download\" to visit our website or dismiss this message by pressing \"OK\".", width / 2, height / 8 + 80 + Fonts.font35.FONT_HEIGHT, 0xffffff)
+        LiquidBounce.fontManager.PingFang18.drawCenteredString( "b${LiquidBounce.latestVersion} got released!", width / 2, height / 8 + 80, 0xffffff)
+        LiquidBounce.fontManager.PingFang18.drawCenteredString( "Press \"Download\" to visit our website or dismiss this message by pressing \"OK\".", width / 2, height / 8 + 80 + LiquidBounce.fontManager.PingFang18.height.toInt(), 0xffffff)
 
         super.drawScreen(mouseX, mouseY, partialTicks)
 
         // Title
         GL11.glScalef(2F, 2F, 2F)
-        drawCenteredString(Fonts.font35, "New update available!", width / 2 / 2, height / 8 / 2 + 20, Color(255, 0, 0).rgb)
+        LiquidBounce.fontManager.PingFang18.drawCenteredString( "New update available!", width / 2 / 2, height / 8 / 2 + 20, Color(255, 0, 0).rgb)
     }
 
     override fun actionPerformed(button: GuiButton) {

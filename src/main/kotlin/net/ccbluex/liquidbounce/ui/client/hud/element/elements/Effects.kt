@@ -1,13 +1,11 @@
 package net.ccbluex.liquidbounce.ui.client.hud.element.elements
 
+import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.ui.client.hud.element.Border
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo
 import net.ccbluex.liquidbounce.ui.client.hud.element.Side
-import net.ccbluex.liquidbounce.ui.font.AWTFontRenderer.Companion.assumeNonVolatile
-import net.ccbluex.liquidbounce.ui.font.Fonts
 import net.ccbluex.liquidbounce.value.BoolValue
-import net.ccbluex.liquidbounce.value.FontValue
 import net.minecraft.client.resources.I18n
 import net.minecraft.potion.Potion
 
@@ -20,7 +18,7 @@ import net.minecraft.potion.Potion
 class Effects(x: Double = 2.0, y: Double = 10.0, scale: Float = 1F,
               side: Side = Side(Side.Horizontal.RIGHT, Side.Vertical.DOWN)) : Element(x, y, scale, side) {
 
-    private val fontValue = FontValue("Font", Fonts.font35)
+    //private val fontValue = FontValue("Font", Fonts.font35)
     private val shadow = BoolValue("Shadow", true)
 
     /**
@@ -30,9 +28,8 @@ class Effects(x: Double = 2.0, y: Double = 10.0, scale: Float = 1F,
         var y = 0F
         var width = 0F
 
-        val fontRenderer = fontValue.get()
+        val fontRenderer = LiquidBounce.fontManager.PingFang18
 
-        assumeNonVolatile = true
 
         for (effect in mc.thePlayer.activePotionEffects) {
             val potion = Potion.potionTypes[effect.potionID]
@@ -58,10 +55,9 @@ class Effects(x: Double = 2.0, y: Double = 10.0, scale: Float = 1F,
                 width = stringWidth
 
             fontRenderer.drawString(name, -stringWidth, y, potion.liquidColor, shadow.get())
-            y -= fontRenderer.FONT_HEIGHT
+            y -= fontRenderer.height
         }
 
-        assumeNonVolatile = false
 
         if (width == 0F)
             width = 40F
@@ -69,6 +65,6 @@ class Effects(x: Double = 2.0, y: Double = 10.0, scale: Float = 1F,
         if (y == 0F)
             y = -10F
 
-        return Border(2F, fontRenderer.FONT_HEIGHT.toFloat(), -width - 2F, y + fontRenderer.FONT_HEIGHT - 2F)
+        return Border(2F, fontRenderer.height, -width - 2F, y + fontRenderer.height - 2F)
     }
 }

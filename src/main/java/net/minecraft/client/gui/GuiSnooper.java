@@ -95,7 +95,7 @@ public class GuiSnooper extends GuiScreen
         for (String s : this.field_146607_r)
         {
             this.drawCenteredString(this.fontRendererObj, s, this.width / 2, i, 8421504);
-            i += this.fontRendererObj.FONT_HEIGHT;
+            i += this.fontRendererObj.getHeight();
         }
 
         super.drawScreen(mouseX, mouseY, partialTicks);
@@ -105,7 +105,7 @@ public class GuiSnooper extends GuiScreen
     {
         public List()
         {
-            super(GuiSnooper.this.mc, GuiSnooper.this.width, GuiSnooper.this.height, 80, GuiSnooper.this.height - 40, GuiSnooper.this.fontRendererObj.FONT_HEIGHT + 1);
+            super(GuiSnooper.this.mc, GuiSnooper.this.width, GuiSnooper.this.height, 80, GuiSnooper.this.height - 40, (int) (GuiSnooper.this.fontRendererObj.getHeight() + 1));
         }
 
         protected int getSize()

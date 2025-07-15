@@ -169,7 +169,7 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
 
             for (String s : textLines)
             {
-                int j = this.fontRendererObj.getStringWidth(s);
+                int j = (int) this.fontRendererObj.getStringWidth(s);
 
                 if (j > i)
                 {

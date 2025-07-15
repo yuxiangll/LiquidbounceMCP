@@ -6,7 +6,6 @@ import com.google.gson.JsonParser;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.ui.client.altmanager.sub.*;
 import net.ccbluex.liquidbounce.ui.client.altmanager.sub.altgenerator.GuiMCLeaks;
-import net.ccbluex.liquidbounce.ui.font.Fonts;
 import net.ccbluex.liquidbounce.utils.ClientUtils;
 import net.ccbluex.liquidbounce.utils.login.LoginUtils;
 import net.ccbluex.liquidbounce.utils.login.MinecraftAccount;
@@ -15,10 +14,7 @@ import net.ccbluex.liquidbounce.utils.misc.HttpUtils;
 import net.ccbluex.liquidbounce.utils.misc.MiscUtils;
 import net.mcleaks.MCLeaks;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.GuiSlot;
-import net.minecraft.client.gui.GuiTextField;
+import net.minecraft.client.gui.*;
 import org.lwjgl.input.Keyboard;
 
 import javax.swing.*;
@@ -99,7 +95,7 @@ public class GuiAltManager extends GuiScreen {
     public void initGui() {
         int textFieldWidth = Math.max(width / 8, 70);
 
-        searchField = new GuiTextField(2, Fonts.font40, width - textFieldWidth - 10, 10, textFieldWidth, 20);
+        searchField = new GuiTextField(2, (FontRenderer) LiquidBounce.fontManager.PingFang20, width - textFieldWidth - 10, 10, textFieldWidth, 20);
         searchField.setMaxStringLength(Integer.MAX_VALUE);
 
         altsList = new GuiList(this);
@@ -149,16 +145,16 @@ public class GuiAltManager extends GuiScreen {
 
         altsList.drawScreen(mouseX, mouseY, partialTicks);
 
-        Fonts.font40.drawCenteredString("AltManager", width / 2.0f, 6, 0xffffff);
-        Fonts.font35.drawCenteredString(this.searchField.getText().isEmpty() ? (LiquidBounce.fileManager.accountsConfig.getAccounts().size() + " Alts") : this.altsList.accounts.size() + " Search Results", width / 2.0f, 18, 0xffffff);
-        Fonts.font35.drawCenteredString(status, width / 2.0f, 32, 0xffffff);
-        Fonts.font35.drawStringWithShadow("§7User: §a" + (MCLeaks.isAltActive() ? MCLeaks.getSession().getUsername() : mc.getSession().getUsername()), 6, 6, 0xffffff);
-        Fonts.font35.drawStringWithShadow("§7Type: §a" + (UserUtils.INSTANCE.isValidTokenOffline(mc.getSession().getToken()) ? "Premium" : "Cracked"), 6, 15, 0xffffff);
+        LiquidBounce.fontManager.PingFang20.drawCenteredString("AltManager", width / 2.0f, 6, 0xffffff);
+        LiquidBounce.fontManager.PingFang18.drawCenteredString(this.searchField.getText().isEmpty() ? (LiquidBounce.fileManager.accountsConfig.getAccounts().size() + " Alts") : this.altsList.accounts.size() + " Search Results", width / 2.0f, 18, 0xffffff);
+        LiquidBounce.fontManager.PingFang18.drawCenteredString(status, width / 2.0f, 32, 0xffffff);
+        LiquidBounce.fontManager.PingFang18.drawStringWithShadow("§7User: §a" + (MCLeaks.isAltActive() ? MCLeaks.getSession().getUsername() : mc.getSession().getUsername()), 6, 6, 0xffffff);
+        LiquidBounce.fontManager.PingFang18.drawStringWithShadow("§7Type: §a" + (UserUtils.INSTANCE.isValidTokenOffline(mc.getSession().getToken()) ? "Premium" : "Cracked"), 6, 15, 0xffffff);
 
         this.searchField.drawTextBox();
 
         if (searchField.getText().isEmpty() && !searchField.isFocused())
-            drawString(Fonts.font40, "§7Search...", this.searchField.xPosition + 4, 17, 0xffffff);
+            LiquidBounce.fontManager.PingFang20.drawString("§7Search...", this.searchField.xPosition + 4, 17, 0xffffff);
 
 
         super.drawScreen(mouseX, mouseY, partialTicks);
@@ -448,8 +444,8 @@ public class GuiAltManager extends GuiScreen {
         @Override
         protected void drawSlot(int id, int x, int y, int var4, int var5, int var6) {
             final MinecraftAccount minecraftAccount = accounts.get(id);
-            Fonts.font40.drawCenteredString(minecraftAccount.getAccountName() == null ? minecraftAccount.getName() : minecraftAccount.getAccountName(), (width / 2), y + 2, Color.WHITE.getRGB(), true);
-            Fonts.font40.drawCenteredString(minecraftAccount.isCracked() ? "Cracked" : (minecraftAccount.getAccountName() == null ? "Premium" : minecraftAccount.getName()), (width / 2), y + 15, minecraftAccount.isCracked() ? Color.GRAY.getRGB() : (minecraftAccount.getAccountName() == null ? Color.GREEN.getRGB() : Color.LIGHT_GRAY.getRGB()), true);
+            LiquidBounce.fontManager.PingFang20.drawStringWithShadow(minecraftAccount.getAccountName() == null ? minecraftAccount.getName() : minecraftAccount.getAccountName(), (width / 2), y + 2, Color.WHITE.getRGB());
+            LiquidBounce.fontManager.PingFang20.drawStringWithShadow(minecraftAccount.isCracked() ? "Cracked" : (minecraftAccount.getAccountName() == null ? "Premium" : minecraftAccount.getName()), (width / 2), y + 15, minecraftAccount.isCracked() ? Color.GRAY.getRGB() : (minecraftAccount.getAccountName() == null ? Color.GREEN.getRGB() : Color.LIGHT_GRAY.getRGB()));
         }
 
         @Override

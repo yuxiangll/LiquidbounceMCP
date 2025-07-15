@@ -6,7 +6,6 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.Border
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo
 import net.ccbluex.liquidbounce.ui.client.hud.element.Side
-import net.ccbluex.liquidbounce.ui.font.Fonts
 import net.ccbluex.liquidbounce.utils.CPSCounter
 import net.ccbluex.liquidbounce.utils.EntityUtils
 import net.ccbluex.liquidbounce.utils.ServerUtils
@@ -45,7 +44,7 @@ class Text(x: Double = 10.0, y: Double = 10.0, scale: Float = 1F,
 
             text.displayString.set("%clientName%")
             text.shadow.set(true)
-            text.fontValue.set(Fonts.font40)
+            //text.fontValue.set(LiquidBounce.fontManager.PingFang40)
             text.setColor(Color(0, 111, 255))
 
             return text
@@ -61,7 +60,7 @@ class Text(x: Double = 10.0, y: Double = 10.0, scale: Float = 1F,
     private val rainbowX = FloatValue("Rainbow-X", -1000F, -2000F, 2000F)
     private val rainbowY = FloatValue("Rainbow-Y", -1000F, -2000F, 2000F)
     private val shadow = BoolValue("Shadow", true)
-    private var fontValue = FontValue("Font", Fonts.font40)
+    //private var fontValue = FontValue("Font", Fonts.font40)
 
     private var editMode = false
     private var editTicks = 0
@@ -146,7 +145,7 @@ class Text(x: Double = 10.0, y: Double = 10.0, scale: Float = 1F,
     override fun drawElement(): Border? {
         val color = Color(redValue.get(), greenValue.get(), blueValue.get()).rgb
 
-        val fontRenderer = fontValue.get()
+        val fontRenderer = LiquidBounce.fontManager.PingFang40
 
         val rainbow = rainbow.get()
 
@@ -168,7 +167,7 @@ class Text(x: Double = 10.0, y: Double = 10.0, scale: Float = 1F,
                 -2F,
                 -2F,
                 fontRenderer.getStringWidth(displayText) + 2F,
-                fontRenderer.FONT_HEIGHT.toFloat()
+                fontRenderer.height.toFloat()
         )
     }
 

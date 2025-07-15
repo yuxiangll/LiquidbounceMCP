@@ -2,7 +2,6 @@ package net.ccbluex.liquidbounce.ui.client;
 
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.special.AntiForge;
-import net.ccbluex.liquidbounce.ui.font.Fonts;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import org.lwjgl.input.Keyboard;
@@ -64,7 +63,7 @@ public class GuiAntiForge extends GuiScreen {
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         drawBackground(0);
-        Fonts.fontBold180.drawCenteredString("AntiForge", (int) (width / 2F), (int) (height / 8F + 5F), 4673984, true);
+        LiquidBounce.fontManager.PingFangBold90.drawStringWithShadow("AntiForge", (int) (width / 2F), (int) (height / 8F + 5F), 4673984);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }

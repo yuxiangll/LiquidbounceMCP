@@ -1,20 +1,18 @@
 package net.ccbluex.liquidbounce.features.module.modules.render;
 
 import meteordevelopment.orbit.EventHandler;
+import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.Render3DEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
 import net.ccbluex.liquidbounce.features.module.modules.misc.AntiBot;
-import net.ccbluex.liquidbounce.ui.font.AWTFontRenderer;
-import net.ccbluex.liquidbounce.ui.font.Fonts;
+import net.ccbluex.liquidbounce.ui.font.AbstractFontRenderer;
 import net.ccbluex.liquidbounce.utils.EntityUtils;
 import net.ccbluex.liquidbounce.utils.render.ColorUtils;
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
 import net.ccbluex.liquidbounce.value.BoolValue;
 import net.ccbluex.liquidbounce.value.FloatValue;
-import net.ccbluex.liquidbounce.value.FontValue;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
@@ -42,7 +40,7 @@ public class NameTags extends Module {
     private final BoolValue distanceValue = new BoolValue("Distance", false);
     private final BoolValue armorValue = new BoolValue("Armor", true);
     private final BoolValue clearNamesValue = new BoolValue("ClearNames", false);
-    private final FontValue fontValue = new FontValue("Font", Fonts.font40);
+    //private final FontValue fontValue = new FontValue("Font", Fonts.font40);
     private final BoolValue borderValue = new BoolValue("Border", true);
     private final FloatValue scaleValue = new FloatValue("Scale", 1F, 1F, 4F);
 
@@ -77,7 +75,7 @@ public class NameTags extends Module {
     }
 
     private void renderNameTag(EntityLivingBase entity, String tag) {
-        FontRenderer fontRenderer = fontValue.get();
+        AbstractFontRenderer fontRenderer = LiquidBounce.fontManager.PingFang20;
 
         // Modify tag
         boolean bot = AntiBot.isBot(entity);
@@ -119,7 +117,6 @@ public class NameTags extends Module {
 
         GL11.glScalef(-scale, -scale, scale);
 
-        AWTFontRenderer.Companion.setAssumeNonVolatile(true);
 
         // Draw NameTag
         float width = fontRenderer.getStringWidth(text) * 0.5f;
@@ -128,22 +125,20 @@ public class NameTags extends Module {
         GL11.glEnable(GL11.GL_BLEND);
 
         if (borderValue.get())
-            RenderUtils.quickDrawBorderedRect(-width - 2F, -2F, width + 4F, fontRenderer.FONT_HEIGHT + 2F, 2F, new Color(255, 255, 255, 90).getRGB(), Integer.MIN_VALUE);
+            RenderUtils.quickDrawBorderedRect(-width - 2F, -2F, width + 4F, fontRenderer.getHeight() + 2F, 2F, new Color(255, 255, 255, 90).getRGB(), Integer.MIN_VALUE);
         else
-            RenderUtils.quickDrawRect(-width - 2F, -2F, width + 4F, fontRenderer.FONT_HEIGHT + 2F, Integer.MIN_VALUE);
+            RenderUtils.quickDrawRect(-width - 2F, -2F, width + 4F, fontRenderer.getHeight() + 2F, Integer.MIN_VALUE);
 
         GL11.glEnable(GL11.GL_TEXTURE_2D);
 
-        fontRenderer.drawString(text, 1F + -width, fontRenderer == Fonts.minecraftFont ? 1F : 1.5F, 0xFFFFFF, true);
+        fontRenderer.drawString(text, 1F + -width, 1.5F, 0xFFFFFF, true);
 
-        AWTFontRenderer.Companion.setAssumeNonVolatile(false);
 
         if (armorValue.get() && entity instanceof EntityPlayer) {
             for (int index = 0; index < 4; index++) {
                 if (entity.getEquipmentInSlot(index) == null)
                     continue;
-
-                    mc.getRenderItem().zLevel = -147F;
+                mc.getRenderItem().zLevel = -147F;
                 mc.getRenderItem().renderItemAndEffectIntoGUI(entity.getEquipmentInSlot(index), -50 + index * 20, -22);
             }
 

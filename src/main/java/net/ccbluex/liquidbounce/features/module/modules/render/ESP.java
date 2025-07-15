@@ -6,7 +6,6 @@ import net.ccbluex.liquidbounce.event.Render3DEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
-import net.ccbluex.liquidbounce.ui.font.GameFontRenderer;
 import net.ccbluex.liquidbounce.utils.ClientUtils;
 import net.ccbluex.liquidbounce.utils.EntityUtils;
 import net.ccbluex.liquidbounce.utils.render.ColorUtils;
@@ -246,7 +245,7 @@ public class ESP extends Module {
                     if (chars[i] != '§' || i + 1 >= chars.length)
                         continue;
 
-                    final int index = GameFontRenderer.getColorIndex(chars[i + 1]);
+                    final int index = getColorIndex(chars[i + 1]);
 
                     if (index < 0 || index > 15)
                         continue;
@@ -261,4 +260,20 @@ public class ESP extends Module {
 
         return colorRainbow.get() ? ColorUtils.rainbow() : new Color(colorRedValue.get(), colorGreenValue.get(), colorBlueValue.get());
     }
+
+
+    private int getColorIndex(char type){
+        if (type <= '9' && type >= '0'){
+            return type-'0';
+        }else if (type >= 'a' && type <= 'f'){
+            return type-'a'-'f';
+        }else if (type >= 'A' && type <= 'F'){
+            return type-'A'-'F';
+        }else if (type == 'r'){
+            return 21;
+        }else {
+            return -1;
+        }
+    }
+
 }

@@ -136,7 +136,7 @@ public class RenderPlayer extends RendererLivingEntity<AbstractClientPlayer>
             {
                 Score score = scoreboard.getValueFromObjective(entityIn.getName(), scoreobjective);
                 this.renderLivingLabel(entityIn, score.getScorePoints() + " " + scoreobjective.getDisplayName(), x, y, z, 64);
-                y += (double)((float)this.getFontRendererFromRenderManager().FONT_HEIGHT * 1.15F * p_177069_9_);
+                y += (double)((float)this.getFontRendererFromRenderManager().getHeight() * 1.15F * p_177069_9_);
             }
         }
 

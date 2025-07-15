@@ -2,7 +2,6 @@ package net.ccbluex.liquidbounce.ui.client
 
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.ui.client.altmanager.GuiAltManager
-import net.ccbluex.liquidbounce.ui.font.Fonts
 import net.minecraft.client.gui.*
 import net.minecraft.client.resources.I18n
 
@@ -34,8 +33,8 @@ class GuiMainMenu : GuiScreen(), GuiYesNoCallback {
 
         Gui.drawRect(width / 2 - 115, height / 4 + 35, width / 2 + 115, height / 4 + 175, Integer.MIN_VALUE)
 
-        Fonts.fontBold180.drawCenteredString(LiquidBounce.CLIENT_NAME, this.width / 2F, height / 8F, 4673984, true)
-        Fonts.font35.drawCenteredString("b" + LiquidBounce.CLIENT_VERSION, this.width / 2F + 148, height / 8F + Fonts.font35.FONT_HEIGHT, 0xffffff, true)
+        LiquidBounce.fontManager.PingFangBold90.drawCenteredStringWithShadow(LiquidBounce.CLIENT_NAME, this.width / 2F, height / 8F, 4673984)
+        LiquidBounce.fontManager.PingFang18.drawCenteredStringWithShadow("b" + LiquidBounce.CLIENT_VERSION, this.width / 2F + 148, height / 8F + LiquidBounce.fontManager.PingFang18.height, 0xffffff)
         super.drawScreen(mouseX, mouseY, partialTicks)
     }
 

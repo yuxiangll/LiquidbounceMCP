@@ -1,12 +1,12 @@
 package net.ccbluex.liquidbounce.ui.client.altmanager.sub.altgenerator
 
+import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.ui.client.altmanager.GuiAltManager
-import net.ccbluex.liquidbounce.ui.font.Fonts
-import net.ccbluex.liquidbounce.utils.ClientUtils
 import net.ccbluex.liquidbounce.utils.misc.MiscUtils
 import net.mcleaks.MCLeaks
 import net.mcleaks.RedeemResponse
 import net.mcleaks.Session
+import net.minecraft.client.gui.FontRenderer
 import net.minecraft.client.gui.Gui
 import net.minecraft.client.gui.GuiButton
 import net.minecraft.client.gui.GuiScreen
@@ -30,7 +30,7 @@ class GuiMCLeaks(private val prevGui: GuiAltManager) : GuiScreen() {
         buttonList.add(GuiButton(3, width / 2 + 2, height - 54, 98, 20, "Back"))
 
         // Token text field
-        tokenField = GuiTextField(0, Fonts.font40, width / 2 - 100, height / 4 + 40, 200, 20)
+        tokenField = GuiTextField(0, LiquidBounce.fontManager.PingFang20 as FontRenderer, width / 2 - 100, height / 4 + 40, 200, 20)
         tokenField.isFocused = true
         tokenField.maxStringLength = 16
     }
@@ -95,11 +95,11 @@ class GuiMCLeaks(private val prevGui: GuiAltManager) : GuiScreen() {
         Gui.drawRect(30, 30, width - 30, height - 30, Int.MIN_VALUE)
 
         // Draw text
-        drawCenteredString(Fonts.font40, "MCLeaks", width / 2, 6, 0xffffff)
-        drawString(Fonts.font40, "Token:", width / 2 - 100, height / 4 + 30, 10526880)
+        LiquidBounce.fontManager.PingFang20.drawCenteredString("MCLeaks", width / 2, 6, 0xffffff)
+        LiquidBounce.fontManager.PingFang20.drawString("Token:", width / 2 - 100, height / 4 + 30, 10526880)
 
         // Draw status
-        if (status != null) drawCenteredString(Fonts.font40, status, width / 2, 18, 0xffffff)
+        if (status != null) LiquidBounce.fontManager.PingFang20.drawCenteredString(status, width / 2, 18, 0xffffff)
 
         tokenField.drawTextBox()
         super.drawScreen(mouseX, mouseY, partialTicks)

@@ -58,7 +58,7 @@ public class GuiYesNo extends GuiScreen
         for (String s : this.field_175298_s)
         {
             this.drawCenteredString(this.fontRendererObj, s, this.width / 2, i, 16777215);
-            i += this.fontRendererObj.FONT_HEIGHT;
+            i += this.fontRendererObj.getHeight();
         }
 
         super.drawScreen(mouseX, mouseY, partialTicks);

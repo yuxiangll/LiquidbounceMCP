@@ -13,6 +13,8 @@ import com.mojang.authlib.minecraft.MinecraftSessionService;
 import com.mojang.authlib.properties.Property;
 import com.mojang.authlib.properties.PropertyMap;
 import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -48,6 +50,8 @@ import net.ccbluex.liquidbounce.utils.CPSCounter;
 import net.ccbluex.liquidbounce.utils.render.IconUtils;
 import net.ccbluex.liquidbounce.utils.render.MiniMapRegister;
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
+import net.ccbluex.liquidbounce.utils.render.font.FontBuilder;
+import net.ccbluex.liquidbounce.utils.render.font.FontUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.audio.MusicTicker;
@@ -217,7 +221,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
      */
     private final PropertyMap profileProperties;
     private ServerData currentServerData;
-    private TextureManager renderEngine;
+    public TextureManager renderEngine;
     private static Minecraft theMinecraft;
     public PlayerControllerMP playerController;
     private boolean fullscreen;
@@ -442,7 +446,8 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         this.mcSoundHandler = new SoundHandler(this.mcResourceManager, this.gameSettings);
         this.mcResourceManager.registerReloadListener(this.mcSoundHandler);
         this.mcMusicTicker = new MusicTicker(this);
-        this.fontRendererObj = new FontRenderer(this.gameSettings, new ResourceLocation("textures/font/ascii.png"), this.renderEngine, false);
+        FontBuilder fontBuilder = new FontBuilder("PingFang_Normal").size(18);
+        this.fontRendererObj = (FontRenderer) fontBuilder.build();
 
         if (this.gameSettings.language != null)
         {
@@ -450,7 +455,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
             this.fontRendererObj.setBidiFlag(this.mcLanguageManager.isCurrentLanguageBidirectional());
         }
 
-        this.standardGalacticFontRenderer = new FontRenderer(this.gameSettings, new ResourceLocation("textures/font/ascii_sga.png"), this.renderEngine, false);
+        this.standardGalacticFontRenderer = (FontRenderer) fontBuilder.build();
         this.mcResourceManager.registerReloadListener(this.fontRendererObj);
         this.mcResourceManager.registerReloadListener(this.standardGalacticFontRenderer);
         this.mcResourceManager.registerReloadListener(new GrassColorReloadListener());

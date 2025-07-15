@@ -1,12 +1,12 @@
 package net.ccbluex.liquidbounce.features.module.modules.render
 
 import meteordevelopment.orbit.EventHandler;
+import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.event.Render2DEvent
 import net.ccbluex.liquidbounce.event.Render3DEvent
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
-import net.ccbluex.liquidbounce.ui.font.Fonts
 import net.ccbluex.liquidbounce.utils.block.BlockUtils.canBeClicked
 import net.ccbluex.liquidbounce.utils.block.BlockUtils.getBlock
 import net.ccbluex.liquidbounce.utils.render.ColorUtils.rainbow
@@ -83,12 +83,12 @@ class BlockOverlay : Module() {
             RenderUtils.drawBorderedRect(
                     scaledResolution.scaledWidth / 2 - 2F,
                     scaledResolution.scaledHeight / 2 + 5F,
-                    scaledResolution.scaledWidth / 2 + Fonts.font40.getStringWidth(info) + 2F,
+                    scaledResolution.scaledWidth / 2 + LiquidBounce.fontManager.PingFang20.getStringWidth(info) + 2F,
                     scaledResolution.scaledHeight / 2 + 16F,
                     3F, Color.BLACK.rgb, Color.BLACK.rgb
             )
             GlStateManager.resetColor()
-            Fonts.font40.drawString(info, scaledResolution.scaledWidth / 2, scaledResolution.scaledHeight / 2 + 7, Color.WHITE.rgb)
+            LiquidBounce.fontManager.PingFang20.drawString(info, scaledResolution.scaledWidth / 2, scaledResolution.scaledHeight / 2 + 7, Color.WHITE.rgb)
         }
     }
 }

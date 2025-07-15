@@ -2,7 +2,6 @@ package net.ccbluex.liquidbounce.ui.client
 
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.ui.client.clickgui.ClickGui
-import net.ccbluex.liquidbounce.ui.font.Fonts
 import net.ccbluex.liquidbounce.utils.ClientUtils
 import net.ccbluex.liquidbounce.utils.misc.MiscUtils
 import net.minecraft.client.gui.GuiButton
@@ -41,8 +40,7 @@ class GuiScripts(private val prevGui: GuiScreen) : GuiScreen() {
         drawBackground(0)
 
         list.drawScreen(mouseX, mouseY, partialTicks)
-
-        drawCenteredString(Fonts.font40, "§9§lScripts", width / 2, 28, 0xffffff)
+        LiquidBounce.fontManager.PingFang20.drawCenteredString( "§9§lScripts", width / 2F, 28F, 0xffffff)
         super.drawScreen(mouseX, mouseY, partialTicks)
     }
 
@@ -166,8 +164,8 @@ class GuiScripts(private val prevGui: GuiScreen) : GuiScreen() {
 
         override fun drawSlot(id: Int, x: Int, y: Int, var4: Int, var5: Int, var6: Int) {
             val script = LiquidBounce.scriptManager.scripts[id]
-            drawCenteredString(Fonts.font40, "§9" + script.scriptName + " §7v" + script.scriptVersion, width / 2, y + 2, Color.LIGHT_GRAY.rgb)
-            drawCenteredString(Fonts.font40, "by §c" + script.scriptAuthors.joinToString(", "), width / 2, y + 15, Color.LIGHT_GRAY.rgb)
+            LiquidBounce.fontManager.PingFang20.drawCenteredString( "§9" + script.scriptName + " §7v" + script.scriptVersion, width / 2F, y + 2F, Color.LIGHT_GRAY)
+            LiquidBounce.fontManager.PingFang20.drawCenteredString( "by §c" + script.scriptAuthors.joinToString(", "), width / 2F, y + 15F, Color.LIGHT_GRAY)
         }
 
         override fun drawBackground() { }

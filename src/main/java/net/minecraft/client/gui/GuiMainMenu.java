@@ -197,8 +197,8 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
 
         synchronized (this.threadLock)
         {
-            this.field_92023_s = this.fontRendererObj.getStringWidth(this.openGLWarning1);
-            this.field_92024_r = this.fontRendererObj.getStringWidth(this.openGLWarning2);
+            this.field_92023_s = (int) this.fontRendererObj.getStringWidth(this.openGLWarning1);
+            this.field_92024_r = (int) this.fontRendererObj.getStringWidth(this.openGLWarning2);
             int k = Math.max(this.field_92023_s, this.field_92024_r);
             this.field_92022_t = (this.width - k) / 2;
             this.field_92021_u = ((GuiButton)this.buttonList.get(0)).yPosition - 24;
@@ -595,7 +595,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
 
                 if (!Strings.isNullOrEmpty(s1))
                 {
-                    this.drawString(this.fontRendererObj, s1, 2, this.height - (10 + l1 * (this.fontRendererObj.FONT_HEIGHT + 1)), 16777215);
+                    this.drawString(this.fontRendererObj, s1, 2, (int) (this.height - (10 + l1 * (this.fontRendererObj.getHeight() + 1))), 16777215);
                 }
             }
 
@@ -610,7 +610,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         }
 
         String s2 = "Copyright Mojang AB. Do not distribute!";
-        this.drawString(this.fontRendererObj, s2, this.width - this.fontRendererObj.getStringWidth(s2) - 2, this.height - 10, -1);
+        this.drawString(this.fontRendererObj, s2, (int) (this.width - this.fontRendererObj.getStringWidth(s2) - 2), this.height - 10, -1);
 
         if (this.openGLWarning1 != null && this.openGLWarning1.length() > 0)
         {

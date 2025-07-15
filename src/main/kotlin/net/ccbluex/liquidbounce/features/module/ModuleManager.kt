@@ -64,6 +64,9 @@ class ModuleManager {
                 FastBreak::class.java,
                 FastPlace::class.java,
                 ESP::class.java,
+
+                FontRendererTest::class.java,
+
                 Speed::class.java,
                 Tracers::class.java,
                 NameTags::class.java,

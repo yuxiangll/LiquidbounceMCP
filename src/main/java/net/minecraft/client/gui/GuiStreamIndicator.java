@@ -29,11 +29,11 @@ public class GuiStreamIndicator
             if (i > 0)
             {
                 String s = "" + i;
-                int j = this.mc.fontRendererObj.getStringWidth(s);
+                int j = (int) this.mc.fontRendererObj.getStringWidth(s);
                 int k = 20;
                 int l = p_152437_1_ - j - 1;
                 int i1 = p_152437_2_ + 20 - 1;
-                int j1 = p_152437_2_ + 20 + this.mc.fontRendererObj.FONT_HEIGHT - 1;
+                int j1 = (int) (p_152437_2_ + 20 + this.mc.fontRendererObj.getHeight() - 1);
                 GlStateManager.disableTexture2D();
                 Tessellator tessellator = Tessellator.getInstance();
                 WorldRenderer worldrenderer = tessellator.getWorldRenderer();

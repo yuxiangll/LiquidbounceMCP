@@ -1,8 +1,9 @@
 package net.ccbluex.liquidbounce.ui.client.tools;
 
-import net.ccbluex.liquidbounce.ui.font.Fonts;
+import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.utils.TabUtils;
 import net.ccbluex.liquidbounce.utils.misc.MiscUtils;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
@@ -50,20 +51,20 @@ public class GuiPortScanner extends GuiScreen {
     public void initGui() {
         Keyboard.enableRepeatEvents(true);
 
-        hostField = new GuiTextField(0, Fonts.font40, width / 2 - 100, 60, 200, 20);
+        hostField = new GuiTextField(0, (FontRenderer) LiquidBounce.fontManager.PingFang20, width / 2 - 100, 60, 200, 20);
         hostField.setFocused(true);
         hostField.setMaxStringLength(Integer.MAX_VALUE);
         hostField.setText("localhost");
 
-        minPortField = new GuiTextField(1, Fonts.font40, width / 2 - 100, 90, 90, 20);
+        minPortField = new GuiTextField(1, (FontRenderer) LiquidBounce.fontManager.PingFang20, width / 2 - 100, 90, 90, 20);
         minPortField.setMaxStringLength(5);
         minPortField.setText(String.valueOf(1));
 
-        maxPortField = new GuiTextField(2, Fonts.font40, width / 2 + 10, 90, 90, 20);
+        maxPortField = new GuiTextField(2, (FontRenderer) LiquidBounce.fontManager.PingFang20, width / 2 + 10, 90, 90, 20);
         maxPortField.setMaxStringLength(5);
         maxPortField.setText(String.valueOf(65535));
 
-        threadsField = new GuiTextField(3, Fonts.font40, width / 2 - 100, 120, 200, 20);
+        threadsField = new GuiTextField(3, (FontRenderer) LiquidBounce.fontManager.PingFang20, width / 2 - 100, 120, 200, 20);
         threadsField.setMaxStringLength(Integer.MAX_VALUE);
         threadsField.setText(String.valueOf(500));
 
@@ -76,9 +77,8 @@ public class GuiPortScanner extends GuiScreen {
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         drawBackground(0);
-
-        drawCenteredString(Fonts.font40, "Port Scanner", width / 2, 34, 0xffffff);
-        drawCenteredString(Fonts.font35, running ? "§7" + checkedPort + " §8/ §7" + maxPort : status == null ? "" : status, width / 2, height / 4 + 80, 0xffffff);
+        LiquidBounce.fontManager.PingFang20.drawCenteredString("Port Scanner", width / 2, 34, 0xffffff);
+        LiquidBounce.fontManager.PingFang18.drawCenteredString(running ? "§7" + checkedPort + " §8/ §7" + maxPort : status == null ? "" : status, width / 2, height / 4 + 80, 0xffffff);
 
         buttonToggle.displayString = running ? "Stop" : "Start";
 
@@ -86,15 +86,14 @@ public class GuiPortScanner extends GuiScreen {
         minPortField.drawTextBox();
         maxPortField.drawTextBox();
         threadsField.drawTextBox();
-
-        drawString(Fonts.font40, "§c§lPorts:", 2, 2, Color.WHITE.hashCode());
+        LiquidBounce.fontManager.PingFang20.drawString("§c§lPorts:", 2, 2, Color.WHITE.hashCode());
 
         synchronized(ports) {
             int i = 12;
 
             for(final Integer integer : ports) {
-                drawString(Fonts.font35, String.valueOf(integer), 2, i, Color.WHITE.hashCode());
-                i += Fonts.font35.FONT_HEIGHT;
+                LiquidBounce.fontManager.PingFang18.drawString(String.valueOf(integer), 2, i, Color.WHITE.hashCode());
+                i += (int) LiquidBounce.fontManager.PingFang18.getHeight();
             }
         }
         super.drawScreen(mouseX, mouseY, partialTicks);

@@ -20,9 +20,7 @@ import net.ccbluex.liquidbounce.ui.client.altmanager.GuiAltManager
 import net.ccbluex.liquidbounce.ui.client.clickgui.ClickGui
 import net.ccbluex.liquidbounce.ui.client.hud.HUD
 import net.ccbluex.liquidbounce.ui.client.hud.HUD.Companion.createDefault
-import net.ccbluex.liquidbounce.ui.client.lunar.ui.MainMenu
-//import net.ccbluex.liquidbounce.ui.client.lunar.ui.MainMenu
-import net.ccbluex.liquidbounce.ui.font.Fonts
+import net.ccbluex.liquidbounce.ui.font.FontManager
 import net.ccbluex.liquidbounce.utils.ClassUtils.hasForge
 import net.ccbluex.liquidbounce.utils.ClientUtils
 import net.ccbluex.liquidbounce.utils.InventoryUtils
@@ -30,7 +28,6 @@ import net.ccbluex.liquidbounce.utils.RotationUtils
 import net.ccbluex.liquidbounce.utils.misc.HttpUtils
 import net.minecraft.client.gui.GuiScreen
 import net.minecraft.util.ResourceLocation
-import org.apache.logging.log4j.Logger
 import java.lang.invoke.MethodHandles
 import java.lang.reflect.Method
 
@@ -51,6 +48,7 @@ object LiquidBounce {
     lateinit var commandManager: CommandManager
     lateinit var fileManager: FileManager
     lateinit var scriptManager: ScriptManager
+    lateinit var fontManager: FontManager
 
     lateinit var eventBus: EventBus
 
@@ -76,6 +74,9 @@ object LiquidBounce {
 
         ClientUtils.getLogger().info("Starting $CLIENT_NAME b$CLIENT_VERSION, by $CLIENT_CREATOR")
 
+
+
+
         // Create file manager
         fileManager = FileManager()
 
@@ -98,8 +99,8 @@ object LiquidBounce {
         // Create command manager
         commandManager = CommandManager()
 
-        // Load client fonts
-        Fonts.loadFonts()
+        // Create font manager
+        fontManager = FontManager()
 
         // Setup module manager and register modules
         moduleManager = ModuleManager()
@@ -162,11 +163,9 @@ object LiquidBounce {
         }
 
         // Load generators
-        GuiAltManager.loadGenerators()
+        //GuiAltManager.loadGenerators()
 
-        //guiMain = GuiMainMenu()
-
-        guiMain = MainMenu()
+        guiMain = GuiMainMenu()
 
         // Set is starting status
         isStarting = false

@@ -1,7 +1,7 @@
 package net.minecraft.client.gui;
 
-import net.ccbluex.liquidbounce.ui.font.AWTFontRenderer;
-import net.ccbluex.liquidbounce.ui.font.Fonts;
+import net.ccbluex.liquidbounce.LiquidBounce;
+import net.ccbluex.liquidbounce.ui.font.AbstractFontRenderer;
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -67,8 +67,7 @@ public class GuiButton extends Gui
      */
     public void drawButton(Minecraft mc, int mouseX, int mouseY) {
         if (visible) {
-            final FontRenderer fontRenderer =
-                    mc.getLanguageManager().isCurrentLocaleUnicode() ? mc.fontRendererObj : Fonts.font35;
+            final AbstractFontRenderer fontRenderer = LiquidBounce.fontManager.PingFang18;
             hovered = (mouseX >= this.xPosition && mouseY >= this.yPosition &&
                     mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height);
 
@@ -100,14 +99,10 @@ public class GuiButton extends Gui
             mc.getTextureManager().bindTexture(buttonTextures);
             mouseDragged(mc, mouseX, mouseY);
 
-            AWTFontRenderer.Companion.setAssumeNonVolatile(true);
-
             fontRenderer.drawStringWithShadow(displayString,
                     (float) ((this.xPosition + this.width / 2) -
                             fontRenderer.getStringWidth(displayString) / 2),
                     this.yPosition + (this.height - 5) / 2F, 14737632);
-
-            AWTFontRenderer.Companion.setAssumeNonVolatile(false);
 
             GlStateManager.resetColor();
         }

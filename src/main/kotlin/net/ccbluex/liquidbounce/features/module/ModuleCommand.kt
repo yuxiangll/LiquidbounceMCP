@@ -23,9 +23,7 @@ class ModuleCommand(val module: Module, val values: List<Value<*>> = module.valu
      * Execute commands with provided [args]
      */
     override fun execute(args: Array<String>) {
-        val valueNames = values
-            .filter { it !is FontValue }
-            .joinToString(separator = "/") { it.name.lowercase() }
+        val valueNames = values.joinToString(separator = "/") { it.name.lowercase() }
 
         val moduleName = module.name.lowercase()
 
@@ -103,7 +101,7 @@ class ModuleCommand(val module: Module, val values: List<Value<*>> = module.valu
 
         return when (args.size) {
             1 -> values
-                .filter { it !is FontValue && it.name.startsWith(args[0], true) }
+                .filter {it.name.startsWith(args[0], true) }
                 .map { it.name.lowercase() }
             2 -> {
                 when(module.getValue(args[0])) {

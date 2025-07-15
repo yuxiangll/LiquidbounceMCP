@@ -1,9 +1,10 @@
 package net.ccbluex.liquidbounce.ui.client.altmanager.sub
 
+import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.ui.client.altmanager.GuiAltManager
 import net.ccbluex.liquidbounce.ui.elements.GuiPasswordField
-import net.ccbluex.liquidbounce.ui.font.Fonts
 import net.ccbluex.liquidbounce.utils.misc.MiscUtils
+import net.minecraft.client.gui.FontRenderer
 import net.minecraft.client.gui.Gui
 import net.minecraft.client.gui.GuiButton
 import net.minecraft.client.gui.GuiScreen
@@ -51,7 +52,9 @@ class GuiDonatorCape(private val prevGui : GuiAltManager) : GuiScreen() {
         buttonList.add(GuiButton(0, width / 2 - 100, height / 4 + 120, "Back"))
 
         // Add fields to screen
-        transferCodeField = GuiPasswordField(666, Fonts.font40, width / 2 - 100, 80, 200, 20)
+
+        transferCodeField = GuiPasswordField(666,
+            LiquidBounce.fontManager.PingFang20 as FontRenderer, width / 2 - 100, 80, 200, 20)
         transferCodeField.isFocused = true
         transferCodeField.maxStringLength = Integer.MAX_VALUE
         transferCodeField.text = transferCode
@@ -69,13 +72,12 @@ class GuiDonatorCape(private val prevGui : GuiAltManager) : GuiScreen() {
         Gui.drawRect(30, 30, width - 30, height - 30, Integer.MIN_VALUE)
 
         // Draw title and status
-        drawCenteredString(Fonts.font35, "Donator Cape", width / 2, 36, 0xffffff)
-        drawCenteredString(Fonts.font35, status, width / 2, height / 4 + 80, 0xffffff)
+        LiquidBounce.fontManager.PingFang18.drawCenteredString("Donator Cape", width / 2, 36, 0xffffff)
+        LiquidBounce.fontManager.PingFang18.drawCenteredString( status, width / 2, height / 4 + 80, 0xffffff)
 
         // Draw fields
         transferCodeField.drawTextBox()
-
-        drawCenteredString(Fonts.font40, "§7Transfer Code:", width / 2 - 65, 66, 0xffffff)
+        LiquidBounce.fontManager.PingFang20.drawCenteredString("§7Transfer Code:", width / 2 - 65, 66, 0xffffff)
 
         stateButton.displayString = if (capeEnabled) {
             "Disable Cape"

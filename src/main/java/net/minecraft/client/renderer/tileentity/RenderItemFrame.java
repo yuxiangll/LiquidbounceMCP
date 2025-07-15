@@ -221,7 +221,7 @@ public class RenderItemFrame extends Render<EntityItemFrame>
                     GlStateManager.blendFunc(770, 771);
                     Tessellator tessellator = Tessellator.getInstance();
                     WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-                    int i = fontrenderer.getStringWidth(s) / 2;
+                    int i = (int) (fontrenderer.getStringWidth(s) / 2);
                     GlStateManager.disableTexture2D();
                     worldrenderer.begin(7, DefaultVertexFormats.POSITION_COLOR);
                     worldrenderer.pos((double)(-i - 1), -1.0D, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();

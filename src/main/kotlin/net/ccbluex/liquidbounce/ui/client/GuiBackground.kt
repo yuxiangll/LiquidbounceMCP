@@ -1,7 +1,6 @@
 package net.ccbluex.liquidbounce.ui.client
 
 import net.ccbluex.liquidbounce.LiquidBounce
-import net.ccbluex.liquidbounce.ui.font.Fonts
 import net.ccbluex.liquidbounce.utils.misc.MiscUtils
 import net.minecraft.client.gui.GuiButton
 import net.minecraft.client.gui.GuiScreen
@@ -70,8 +69,7 @@ class GuiBackground(val prevGui: GuiScreen) : GuiScreen() {
 
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
         drawBackground(0)
-        Fonts.fontBold180.drawCenteredString("Background", this.width / 2F, height / 8F + 5F,
-                4673984, true)
+        LiquidBounce.fontManager.PingFangBold90.drawCenteredStringWithShadow("Background", this.width / 2F, height / 8F + 5F, 4673984)
 
         super.drawScreen(mouseX, mouseY, partialTicks)
     }

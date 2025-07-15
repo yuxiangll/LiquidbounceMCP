@@ -7,6 +7,7 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.elements.Target
 import net.ccbluex.liquidbounce.utils.ClientUtils
 import net.ccbluex.liquidbounce.utils.MinecraftInstance
 import net.minecraft.client.gui.ScaledResolution
+import net.minecraft.client.renderer.GlStateManager
 import org.lwjgl.opengl.GL11
 import kotlin.math.max
 import kotlin.math.min
@@ -53,7 +54,9 @@ open class HUD : MinecraftInstance() {
     fun render(designer: Boolean) {
         elements.sortedBy { -it.info.priority }
                 .forEach {
-                    GL11.glPushMatrix()
+                    GlStateManager.pushMatrix()
+                    GlStateManager.resetColor()
+
 
                     if (!it.info.disableScale)
                         GL11.glScalef(it.scale, it.scale, it.scale)
@@ -62,15 +65,12 @@ open class HUD : MinecraftInstance() {
 
                     try {
                         it.border = it.drawElement()
-
                         if (designer)
                             it.border?.draw()
                     } catch (ex: Exception) {
-                        ClientUtils.getLogger()
-                                .error("Something went wrong while drawing ${it.name} element in HUD.", ex)
-            }
-
-            GL11.glPopMatrix()
+                        ClientUtils.getLogger().error("Something went wrong while drawing ${it.name} element in HUD.", ex)
+                    }
+                    GlStateManager.popMatrix()
         }
     }
 

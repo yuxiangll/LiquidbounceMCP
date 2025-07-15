@@ -9,8 +9,6 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo
 import net.ccbluex.liquidbounce.ui.client.hud.element.Side
 import net.ccbluex.liquidbounce.ui.client.hud.element.Side.Horizontal
 import net.ccbluex.liquidbounce.ui.client.hud.element.Side.Vertical
-import net.ccbluex.liquidbounce.ui.font.AWTFontRenderer
-import net.ccbluex.liquidbounce.ui.font.Fonts
 import net.ccbluex.liquidbounce.utils.render.AnimationUtils
 import net.ccbluex.liquidbounce.utils.render.RenderUtils
 import net.ccbluex.liquidbounce.utils.render.shader.shaders.RainbowFontShader
@@ -53,7 +51,7 @@ class Arraylist(x: Double = 1.0, y: Double = 2.0, scale: Float = 1F,
     private val textHeightValue = FloatValue("TextHeight", 11F, 1F, 20F)
     private val textYValue = FloatValue("TextY", 1F, 0F, 20F)
     private val tagsArrayColor = BoolValue("TagsArrayColor", false)
-    private val fontValue = FontValue("Font", Fonts.font40)
+    //private val fontValue = FontValue("Font", Fonts.font40)
 
     private var x2 = 0
     private var y2 = 0F
@@ -61,9 +59,9 @@ class Arraylist(x: Double = 1.0, y: Double = 2.0, scale: Float = 1F,
     private var modules = emptyList<Module>()
 
     override fun drawElement(): Border? {
-        val fontRenderer = fontValue.get()
+        //val fontRenderer = fontValue.get()
 
-        AWTFontRenderer.assumeNonVolatile = true
+        //AWTFontRenderer.assumeNonVolatile = true
 
         // Slide animation - update every render
         val delta = RenderUtils.deltaTime
@@ -80,7 +78,7 @@ class Arraylist(x: Double = 1.0, y: Double = 2.0, scale: Float = 1F,
             if (upperCaseValue.get())
                 displayString = displayString.uppercase()
 
-            val width = fontRenderer.getStringWidth(displayString)
+            val width = LiquidBounce.fontManager.PingFang20.getStringWidth(displayString)
 
             if (module.state) {
                 if (module.slide < width) {
@@ -149,7 +147,7 @@ class Arraylist(x: Double = 1.0, y: Double = 2.0, scale: Float = 1F,
                     val rainbow = colorMode.equals("Rainbow", ignoreCase = true)
 
                     RainbowFontShader.begin(rainbow, if (rainbowX.get() == 0.0F) 0.0F else 1.0F / rainbowX.get(), if (rainbowY.get() == 0.0F) 0.0F else 1.0F / rainbowY.get(), System.currentTimeMillis() % 10000 / 10000F).use {
-                        fontRenderer.drawString(displayString, xPos - if (rectMode.equals("right", true)) 3 else 0, yPos + textY, when {
+                        LiquidBounce.fontManager.PingFang20.drawString(displayString, xPos - if (rectMode.equals("right", true)) 3 else 0, yPos + textY, when {
                             rainbow -> 0
                             colorMode.equals("Random", ignoreCase = true) -> moduleColor
                             else -> customColor
@@ -188,7 +186,7 @@ class Arraylist(x: Double = 1.0, y: Double = 2.0, scale: Float = 1F,
                     if (upperCaseValue.get())
                         displayString = displayString.uppercase()
 
-                    val width = fontRenderer.getStringWidth(displayString)
+                    val width = LiquidBounce.fontManager.PingFang20.getStringWidth(displayString)
                     val xPos = -(width - module.slide) + if (rectMode.equals("left", true)) 5 else 2
                     val yPos = (if (side.vertical == Vertical.DOWN) -textSpacer else textSpacer) *
                             if (side.vertical == Vertical.DOWN) index + 1 else index
@@ -212,7 +210,7 @@ class Arraylist(x: Double = 1.0, y: Double = 2.0, scale: Float = 1F,
                     val rainbow = colorMode.equals("Rainbow", ignoreCase = true)
 
                     RainbowFontShader.begin(rainbow, if (rainbowX.get() == 0.0F) 0.0F else 1.0F / rainbowX.get(), if (rainbowY.get() == 0.0F) 0.0F else 1.0F / rainbowY.get(), System.currentTimeMillis() % 10000 / 10000F).use {
-                        fontRenderer.drawString(displayString, xPos, yPos + textY, when {
+                        LiquidBounce.fontManager.PingFang20.drawString(displayString, xPos, yPos + textY, when {
                             rainbow -> 0
                             colorMode.equals("Random", ignoreCase = true) -> moduleColor
                             else -> customColor
@@ -241,7 +239,7 @@ class Arraylist(x: Double = 1.0, y: Double = 2.0, scale: Float = 1F,
                 }
             }
         }
-
+        GlStateManager.resetColor()
         // Draw border
         if (mc.currentScreen is GuiHudDesigner) {
             x2 = Int.MIN_VALUE
@@ -270,14 +268,13 @@ class Arraylist(x: Double = 1.0, y: Double = 2.0, scale: Float = 1F,
             return Border(0F, 0F, x2 - 7F, y2 - if (side.vertical == Vertical.DOWN) 1F else 0F)
         }
 
-        AWTFontRenderer.assumeNonVolatile = false
-        GlStateManager.resetColor()
+
         return null
     }
 
     override fun updateElement() {
         modules = LiquidBounce.moduleManager.modules
                 .filter { it.array && it.slide > 0 }
-                .sortedBy { -fontValue.get().getStringWidth(if (upperCaseValue.get()) (if (!tags.get()) it.name else if (tagsArrayColor.get()) it.colorlessTagName else it.tagName).uppercase() else if (!tags.get()) it.name else if (tagsArrayColor.get()) it.colorlessTagName else it.tagName) }
+                .sortedBy { -LiquidBounce.fontManager.PingFang20.getStringWidth(if (upperCaseValue.get()) (if (!tags.get()) it.name else if (tagsArrayColor.get()) it.colorlessTagName else it.tagName).uppercase() else if (!tags.get()) it.name else if (tagsArrayColor.get()) it.colorlessTagName else it.tagName) }
     }
 }

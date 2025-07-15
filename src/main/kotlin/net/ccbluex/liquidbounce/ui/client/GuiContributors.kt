@@ -3,7 +3,7 @@ package net.ccbluex.liquidbounce.ui.client
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.google.gson.annotations.SerializedName
-import net.ccbluex.liquidbounce.ui.font.Fonts
+import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.utils.ClientUtils
 import net.ccbluex.liquidbounce.utils.misc.HttpUtils
 import net.ccbluex.liquidbounce.utils.render.CustomTexture
@@ -58,7 +58,7 @@ class GuiContributors(private val prevGui: GuiScreen) : GuiScreen() {
 
             val avatar = credit.avatar
 
-            val imageSize = fontRendererObj.FONT_HEIGHT * 4
+            val imageSize = (fontRendererObj.getHeight() * 4).toInt()
 
             if (avatar != null) {
                 GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS)
@@ -97,33 +97,38 @@ class GuiContributors(private val prevGui: GuiScreen) : GuiScreen() {
 
             y += imageSize
 
-            Fonts.font40.drawString("@" + credit.name, (x + infoOffset + 5).toFloat(), 48f, Color.WHITE.rgb, true)
-            Fonts.font40.drawString("${credit.commits} commits §a${DECIMAL_FORMAT.format(credit.additions)}++ §4${DECIMAL_FORMAT.format(credit.deletions)}--", (x + infoOffset + 5).toFloat(), (y - Fonts.font40.FONT_HEIGHT).toFloat(), Color.WHITE.rgb, true)
+            LiquidBounce.fontManager.PingFang20.drawString("@" + credit.name, (x + infoOffset + 5).toFloat(), 48f, Color.WHITE.rgb, true)
+            LiquidBounce.fontManager.PingFang20.drawString("${credit.commits} commits §a${DECIMAL_FORMAT.format(credit.additions)}++ §4${DECIMAL_FORMAT.format(credit.deletions)}--", (x + infoOffset + 5).toFloat(),
+                (y - LiquidBounce.fontManager.PingFang20.height), Color.WHITE.rgb, true)
 
             for (s in credit.contributions) {
-                y += Fonts.font40.FONT_HEIGHT + 2
+                y += LiquidBounce.fontManager.PingFang20.height.toInt() + 2
 
                 GlStateManager.disableTexture2D()
                 GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f)
                 GL11.glBegin(GL11.GL_LINES)
 
-                GL11.glVertex2i(x, y + Fonts.font40.FONT_HEIGHT / 2 - 1)
-                GL11.glVertex2i(x + 3, y + Fonts.font40.FONT_HEIGHT / 2 - 1)
+                GL11.glVertex2i(x, y + LiquidBounce.fontManager.PingFang20.height.toInt() / 2 - 1)
+                GL11.glVertex2i(x + 3, y + LiquidBounce.fontManager.PingFang20.height.toInt() / 2 - 1)
 
                 GL11.glEnd()
 
-                Fonts.font40.drawString(s, (x + 5f), y.toFloat(), Color.WHITE.rgb, true)
+                LiquidBounce.fontManager.PingFang20.drawString(s, (x + 5f), y.toFloat(), Color.WHITE.rgb, true)
             }
         }
 
-        Fonts.font40.drawCenteredString("Contributors", width / 2F, 6F, 0xffffff)
+        LiquidBounce.fontManager.PingFang20.drawCenteredString("Contributors", width / 2F, 6F, 0xffffff)
 
         if (credits.isEmpty()) {
             if (failed) {
                 val gb = ((sin(System.currentTimeMillis() * (1 / 333.0)) + 1) * (0.5 * 255)).toInt()
-                drawCenteredString(Fonts.font40, "Failed to load", width / 8, height / 2, Color(255, gb, gb).rgb)
+                LiquidBounce.fontManager.PingFang20.drawCenteredString("Failed to load", width / 8F, height / 2F, Color(255, gb, gb))
+
             } else {
-                drawCenteredString(Fonts.font40, "Loading...", width / 8, height / 2, Color.WHITE.rgb)
+                LiquidBounce.fontManager.PingFang20.drawCenteredString("Loading...", width / 8F, height / 2F, Color.WHITE.rgb)
+
+
+
                 RenderUtils.drawLoadingCircle((width / 8).toFloat(), (height / 2 - 40).toFloat())
             }
         }
@@ -203,10 +208,10 @@ class GuiContributors(private val prevGui: GuiScreen) : GuiScreen() {
 
             for (credit in credits) {
                 try {
-                    HttpUtils.requestStream("${credit.avatarUrl}?s=${fontRendererObj.FONT_HEIGHT * 4}", "GET")?.use {
+                    HttpUtils.requestStream("${credit.avatarUrl}?s=${fontRendererObj.getHeight() * 4}", "GET")?.use {
                         credit.avatar = CustomTexture(ImageIO.read(it)!!)
                     }
-                } catch (e: Exception) {
+                } catch (_: Exception) {
 
                 }
             }
@@ -249,8 +254,7 @@ class GuiContributors(private val prevGui: GuiScreen) : GuiScreen() {
 
         override fun drawSlot(entryID: Int, p_180791_2_: Int, p_180791_3_: Int, p_180791_4_: Int, mouseXIn: Int, mouseYIn: Int) {
             val credit = credits[entryID]
-
-            Fonts.font40.drawCenteredString(credit.name, width / 2F, p_180791_3_ + 2F, Color.WHITE.rgb, true)
+            LiquidBounce.fontManager.PingFang20.drawCenteredStringWithShadow(credit.name, width / 2F, p_180791_3_ + 2F, Color.WHITE.rgb)
         }
 
         override fun drawBackground() {}

@@ -6,7 +6,6 @@ import net.ccbluex.liquidbounce.features.module.modules.combat.KillAura
 import net.ccbluex.liquidbounce.ui.client.hud.element.Border
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo
-import net.ccbluex.liquidbounce.ui.font.Fonts
 import net.ccbluex.liquidbounce.utils.extensions.getDistanceToEntityBox
 import net.ccbluex.liquidbounce.utils.render.RenderUtils
 import net.ccbluex.liquidbounce.value.FloatValue
@@ -43,9 +42,8 @@ class Target : Element() {
                 easingHealth = target.health
             }
 
-            val width = (38 + Fonts.font40.getStringWidth(target.name))
-                    .coerceAtLeast(118)
-                    .toFloat()
+            val width = (38 + LiquidBounce.fontManager.PingFang20.getStringWidth(target.name))
+                    .coerceAtLeast(118F)
 
             // Draw rect box
             RenderUtils.drawBorderedRect(0F, 0F, width, 36F, 3F, Color.BLACK.rgb, Color.BLACK.rgb)
@@ -66,13 +64,13 @@ class Target : Element() {
 
             easingHealth += ((target.health - easingHealth) / 2.0F.pow(10.0F - fadeSpeed.get())) * RenderUtils.deltaTime
 
-            Fonts.font40.drawString(target.name, 36, 3, 0xffffff)
-            Fonts.font35.drawString("Distance: ${decimalFormat.format(mc.thePlayer.getDistanceToEntityBox(target))}", 36, 15, 0xffffff)
+            LiquidBounce.fontManager.PingFang20.drawString(target.name, 36, 3, 0xffffff)
+            LiquidBounce.fontManager.PingFang18.drawString("Distance: ${decimalFormat.format(mc.thePlayer.getDistanceToEntityBox(target))}", 36, 15, 0xffffff)
 
             // Draw info
             val playerInfo = mc.netHandler.getPlayerInfo(target.uniqueID)
             if (playerInfo != null) {
-                Fonts.font35.drawString("Ping: ${playerInfo.responseTime.coerceAtLeast(0)}",
+                LiquidBounce.fontManager.PingFang18.drawString("Ping: ${playerInfo.responseTime.coerceAtLeast(0)}",
                         36, 24, 0xffffff)
 
                 // Draw head

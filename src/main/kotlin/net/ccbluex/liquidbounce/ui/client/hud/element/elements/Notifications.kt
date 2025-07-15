@@ -6,7 +6,6 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.Border
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo
 import net.ccbluex.liquidbounce.ui.client.hud.element.Side
-import net.ccbluex.liquidbounce.ui.font.Fonts
 import net.ccbluex.liquidbounce.utils.render.AnimationUtils
 import net.ccbluex.liquidbounce.utils.render.RenderUtils
 import net.minecraft.client.renderer.GlStateManager
@@ -28,7 +27,7 @@ class Notifications(x: Double = 0.0, y: Double = 30.0, scale: Float = 1F,
      * Draw element
      */
     override fun drawElement(): Border? {
-        if (LiquidBounce.hud.notifications.size > 0)
+        if (LiquidBounce.hud.notifications.isNotEmpty())
             LiquidBounce.hud.notifications[0].drawNotification()
 
         if (mc.currentScreen is GuiHudDesigner) {
@@ -60,7 +59,7 @@ class Notification(private val message: String) {
     enum class FadeState { IN, STAY, OUT, END }
 
     init {
-        textLength = Fonts.font35.getStringWidth(message)
+        textLength = LiquidBounce.fontManager.PingFang18.getStringWidth(message).toInt()
     }
 
     /**
@@ -70,7 +69,7 @@ class Notification(private val message: String) {
         // Draw notification
         RenderUtils.drawRect(-x + 8 + textLength, 0F, -x, -20F, Color.BLACK.rgb)
         RenderUtils.drawRect(-x, 0F, -x - 5, -20F, Color(0, 160, 255).rgb)
-        Fonts.font35.drawString(message, -x + 4, -14F, Int.MAX_VALUE)
+        LiquidBounce.fontManager.PingFang18.drawString(message, -x + 4, -14F, Int.MAX_VALUE)
         GlStateManager.resetColor()
 
         // Animation

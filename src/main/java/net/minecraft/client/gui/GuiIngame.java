@@ -12,7 +12,6 @@ import net.ccbluex.liquidbounce.event.Render2DEvent;
 import net.ccbluex.liquidbounce.features.module.modules.render.AntiBlind;
 import net.ccbluex.liquidbounce.features.module.modules.render.HUD;
 import net.ccbluex.liquidbounce.features.module.modules.render.NoScoreboard;
-import net.ccbluex.liquidbounce.ui.font.AWTFontRenderer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -336,7 +335,6 @@ public class GuiIngame extends Gui
         }
 
         LiquidBounce.eventBus.post(new Render2DEvent(partialTicks));
-        AWTFontRenderer.Companion.garbageCollectionTick();
 
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         GlStateManager.disableLighting();
@@ -438,7 +436,7 @@ public class GuiIngame extends Gui
             }
 
             String s = "" + this.mc.thePlayer.experienceLevel;
-            int l1 = (scaledRes.getScaledWidth() - this.getFontRenderer().getStringWidth(s)) / 2;
+            int l1 = (int) ((scaledRes.getScaledWidth() - this.getFontRenderer().getStringWidth(s)) / 2);
             int i1 = scaledRes.getScaledHeight() - 31 - 4;
             int j1 = 0;
             this.getFontRenderer().drawString(s, l1 + 1, i1, 0);
@@ -463,7 +461,7 @@ public class GuiIngame extends Gui
                 s = EnumChatFormatting.ITALIC + s;
             }
 
-            int i = (scaledRes.getScaledWidth() - this.getFontRenderer().getStringWidth(s)) / 2;
+            int i = (int) ((scaledRes.getScaledWidth() - this.getFontRenderer().getStringWidth(s)) / 2);
             int j = scaledRes.getScaledHeight() - 59;
 
             if (!this.mc.playerController.shouldDrawHUD())
@@ -506,7 +504,7 @@ public class GuiIngame extends Gui
             s = I18n.format("demo.remainingTime", new Object[] {StringUtils.ticksToElapsedTime((int)(120500L - this.mc.theWorld.getTotalWorldTime()))});
         }
 
-        int i = this.getFontRenderer().getStringWidth(s);
+        int i = (int) this.getFontRenderer().getStringWidth(s);
         this.getFontRenderer().drawStringWithShadow(s, (float)(scaledRes.getScaledWidth() - i - 10), 5.0F, 16777215);
         this.mc.mcProfiler.endSection();
     }
@@ -573,16 +571,16 @@ public class GuiIngame extends Gui
             collection = list;
         }
 
-        int i = this.getFontRenderer().getStringWidth(objective.getDisplayName());
+        int i = (int) this.getFontRenderer().getStringWidth(objective.getDisplayName());
 
         for (Score score : collection)
         {
             ScorePlayerTeam scoreplayerteam = scoreboard.getPlayersTeam(score.getPlayerName());
             String s = ScorePlayerTeam.formatPlayerName(scoreplayerteam, score.getPlayerName()) + ": " + EnumChatFormatting.RED + score.getScorePoints();
-            i = Math.max(i, this.getFontRenderer().getStringWidth(s));
+            i = (int) Math.max(i, this.getFontRenderer().getStringWidth(s));
         }
 
-        int i1 = collection.size() * this.getFontRenderer().FONT_HEIGHT;
+        int i1 = (int) (collection.size() * this.getFontRenderer().getHeight());
         int j1 = scaledRes.getScaledHeight() / 2 + i1 / 3;
         int k1 = 3;
         int l1 = scaledRes.getScaledWidth() - i - k1;
@@ -594,18 +592,18 @@ public class GuiIngame extends Gui
             ScorePlayerTeam scoreplayerteam1 = scoreboard.getPlayersTeam(score1.getPlayerName());
             String s1 = ScorePlayerTeam.formatPlayerName(scoreplayerteam1, score1.getPlayerName());
             String s2 = EnumChatFormatting.RED + "" + score1.getScorePoints();
-            int k = j1 - j * this.getFontRenderer().FONT_HEIGHT;
+            int k = (int) (j1 - j * this.getFontRenderer().getHeight());
             int l = scaledRes.getScaledWidth() - k1 + 2;
-            drawRect(l1 - 2, k, l, k + this.getFontRenderer().FONT_HEIGHT, 1342177280);
+            drawRect(l1 - 2, k, l, (int) (k + this.getFontRenderer().getHeight()), 1342177280);
             this.getFontRenderer().drawString(s1, l1, k, 553648127);
             this.getFontRenderer().drawString(s2, l - this.getFontRenderer().getStringWidth(s2), k, 553648127);
 
             if (j == collection.size())
             {
                 String s3 = objective.getDisplayName();
-                drawRect(l1 - 2, k - this.getFontRenderer().FONT_HEIGHT - 1, l, k - 1, 1610612736);
+                drawRect(l1 - 2, (int) (k - this.getFontRenderer().getHeight() - 1), l, k - 1, 1610612736);
                 drawRect(l1 - 2, k - 1, l, k, 1342177280);
-                this.getFontRenderer().drawString(s3, l1 + i / 2 - this.getFontRenderer().getStringWidth(s3) / 2, k - this.getFontRenderer().FONT_HEIGHT, 553648127);
+                this.getFontRenderer().drawString(s3, l1 + i / 2 - this.getFontRenderer().getStringWidth(s3) / 2, k - this.getFontRenderer().getHeight(), 553648127);
             }
         }
     }

@@ -126,7 +126,7 @@ public class GuiStreamOptions extends GuiScreen
 
         if (this.field_152315_t)
         {
-            this.drawCenteredString(this.fontRendererObj, EnumChatFormatting.RED + I18n.format("options.stream.changes", new Object[0]), this.width / 2, 20 + this.fontRendererObj.FONT_HEIGHT, 16777215);
+            this.drawCenteredString(this.fontRendererObj, EnumChatFormatting.RED + I18n.format("options.stream.changes", new Object[0]), this.width / 2, (int) (20 + this.fontRendererObj.getHeight()), 16777215);
         }
 
         super.drawScreen(mouseX, mouseY, partialTicks);
